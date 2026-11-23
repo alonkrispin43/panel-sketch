@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>סקיצת לוח – פנייה, סקיצה ותשובה ללקוח</title>
+<title>אלטק – סקיצות לוחות חשמל והצעות מחיר</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
@@ -118,7 +118,7 @@ tr.tot td{font-weight:700;border-bottom:none}
 <header>
   <div class="bus" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="head-in">
-    <h1 class="brand">סקיצת לוח<small>מפנייה של לקוח לסקיצה ולהצעה ראשונית</small></h1>
+    <h1 class="brand">אלטק<small>סקיצות לוחות חשמל והצעות מחיר</small></h1>
     <nav class="steps" aria-label="שלבים">
       <a href="#request" data-v="request"><b>1</b>פנייה</a>
       <a href="#review" data-v="review"><b>2</b>בדיקת מהנדס</a>
@@ -184,7 +184,7 @@ tr.tot td{font-weight:700;border-bottom:none}
   <h2 id="t3">תשובה ללקוח</h2>
   <p class="lead noprint">המכתב נוצר מהחישובים. אפשר לערוך אותו ידנית; אחרי אישור המהנדס אפשר לשלוח.</p>
   <div class="inline-set noprint">
-    <label>שם המהנדס החותם<input data-k="engineer"></label>
+    <label>שם החותם<input data-k="engineer"></label>
   </div>
   <label class="noprint" for="letter" style="margin-bottom:6px">נוסח המכתב</label>
   <textarea id="letter" class="letter"></textarea>
@@ -241,7 +241,7 @@ let state;
 try{state=JSON.parse(localStorage.getItem("panel-proto-v1"))}catch(e){}
 if(!state||!state.loads){state=JSON.parse(JSON.stringify(DEMO))}
 state.pricing=state.pricing||{rate:220,margin:25};
-state.engineer=state.engineer||"";
+state.engineer=state.engineer||"אלירן קריספין";
 const save=()=>{try{localStorage.setItem("panel-proto-v1",JSON.stringify(state))}catch(e){}};
 
 const $=s=>document.querySelector(s);
@@ -457,7 +457,7 @@ function buildLetter(r){
   const extras=[types.vfd?`${types.vfd} ממירי תדר`:"",types.soft?`${types.soft} מתנעים רכים`:"",types.dol?`${types.dol} יציאות מנוע בהתנעה ישירה`:""].filter(Boolean).join(", ");
   return `שלום ${c.name||""},
 
-תודה על פנייתך בנושא לוח חשמל${c.site?` עבור ${c.site}`:""}${c.company?` (${c.company})`:""}.
+תודה על פנייתך לאלטק בנושא לוח חשמל${c.site?` עבור ${c.site}`:""}${c.company?` (${c.company})`:""}.
 
 על סמך הנתונים שמסרת, ${r.circuits.length} צרכנים בהספק מותקן כולל של ${fmt(r.kwTot,1)} קו״ט, הכנו סקיצה ראשונית של הלוח:
 
@@ -475,14 +475,14 @@ function buildLetter(r){
 נשמח לענות על כל שאלה.
 
 בברכה,
-${state.engineer||"[שם המהנדס]"}
-מהנדס חשמל`;
+${state.engineer||"אלירן קריספין"}
+אלטק`;
 }
 function fillLetter(){const r=compute();$("#letter").value=r.circuits.length?buildLetter(r):"אין עדיין צרכנים בפנייה.";updateMail()}
 function updateMail(){
   const ok=$("#approve").checked&&compute().circuits.length>0;
   const c=state.customer;
-  const subj=`הצעה ראשונית ללוח חשמל${c.site?" – "+c.site:""}`;
+  const subj=`אלטק: הצעה ראשונית ללוח חשמל${c.site?" – "+c.site:""}`;
   $("#mailBtn").href=`mailto:${encodeURIComponent(c.email||"")}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent($("#letter").value)}`;
   $("#mailBtn").setAttribute("aria-disabled",ok?"false":"true");
   $("#copyBtn").disabled=!ok;$("#printBtn").disabled=!ok;
