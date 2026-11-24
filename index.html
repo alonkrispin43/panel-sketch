@@ -11,7 +11,7 @@
 :root{
   --bg:#E3E5E0; --surface:#F4F5F2; --ink:#1C2228; --muted:#59626A; --line:#B8BDB6;
   --blue:#2E3F94; --blue-ink:#FFFFFF; --hazard:#C9302C; --ok:#2E6B34; --bad:#A3271E;
-  --l1:#7A4B2A; --l2:#22262A; --l3:#8E9499; --pe:#3E8E3A;
+  --l1:#7A4B2A; --l2:#22262A; --l3:#8E9499; --nn:#2B6CB0; --pe:#3E8E3A;
   --font:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,sans-serif;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -22,102 +22,125 @@
   :root:not([data-theme="light"]){
     --bg:#161A1E; --surface:#1F252A; --ink:#E5E8E3; --muted:#9BA4AC; --line:#38424A;
     --blue:#93A4F2; --blue-ink:#131A3A; --ok:#7CC283; --bad:#F08A80;
-    --l1:#B07A52; --l2:#D2D5D8; --l3:#7C848A; color-scheme:dark;
+    --l1:#B07A52; --l2:#D2D5D8; --l3:#7C848A; --nn:#6EA8E8; --pe:#7CC283; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#161A1E; --surface:#1F252A; --ink:#E5E8E3; --muted:#9BA4AC; --line:#38424A;
   --blue:#93A4F2; --blue-ink:#131A3A; --ok:#7CC283; --bad:#F08A80;
-  --l1:#B07A52; --l2:#D2D5D8; --l3:#7C848A; color-scheme:dark;
+  --l1:#B07A52; --l2:#D2D5D8; --l3:#7C848A; --nn:#6EA8E8; --pe:#7CC283; color-scheme:dark;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+body:not(.cust) .cust-only{display:none!important}
+body.cust .eng-only{display:none!important}
 
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
 .bus{height:9px;display:grid;grid-template-rows:1fr 1fr 1fr}
 .bus i{display:block}
 .bus i:nth-child(1){background:var(--l1)}.bus i:nth-child(2){background:var(--l2)}.bus i:nth-child(3){background:var(--l3)}
-.head-in{max-width:1080px;margin:0 auto;padding:10px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px}
+.head-in{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px}
 .brand{font-weight:700;font-size:1.15rem;margin:0;display:flex;align-items:center;gap:12px}
-.brand img{flex:none}
-.logo{background:#FFFFFF;border-radius:6px;padding:3px 6px;height:48px;width:auto;box-sizing:content-box}
-.letterhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;background:#FFFFFF;color:#1C2228;border:1px solid var(--line);border-bottom:4px solid var(--hazard);border-radius:8px 8px 0 0;padding:12px 16px}
-.letterhead img{height:64px;width:auto}
-.letterhead div{font-size:.88rem;line-height:1.6}
-.letterhead + .letter{border-radius:0 0 8px 8px;border-top:none}
 .brand small{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
-nav.steps{display:flex;gap:4px;margin-inline-start:auto}
+.logo{background:#FFFFFF;border-radius:6px;padding:3px 6px;height:48px;width:auto;box-sizing:content-box;flex:none}
+nav.steps{display:flex;flex-wrap:wrap;gap:4px;margin-inline-start:auto}
 nav.steps a{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem}
 nav.steps a b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;font-size:.8rem}
 nav.steps a[aria-current="page"]{color:var(--ink);background:var(--bg)}
 nav.steps a[aria-current="page"] b{background:var(--hazard);border-color:var(--hazard);color:#FFFFFF}
 
-main{max-width:1080px;margin:0 auto;padding:24px 18px 64px}
+main{max-width:1180px;margin:0 auto;padding:24px 18px 64px}
 .view{display:none}.view.on{display:block}
 h2{font-size:1.6rem;margin:0 0 4px;line-height:1.25}
 h3{font-size:1.1rem;margin:28px 0 10px}
-.lead{color:var(--muted);margin:0 0 20px;max-width:65ch}
+.lead{color:var(--muted);margin:0 0 20px;max-width:70ch}
+.banner{background:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--blue);border-radius:6px;padding:10px 14px;margin:0 0 16px}
 
-fieldset{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:16px;margin:0 0 18px}
+fieldset{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:16px;margin:0 0 18px;min-width:0}
 legend{font-weight:700;padding:0 6px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 16px}
+details.eng{margin:0 0 18px}
+details.eng summary{cursor:pointer;font-weight:700;padding:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 16px}
 label{display:flex;flex-direction:column;gap:4px;font-size:.88rem;color:var(--muted)}
+label.chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-size:.95rem}
+label.chk input{width:18px;height:18px}
 input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0}
 textarea{resize:vertical}
 input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.hint{font-size:.8rem;color:var(--muted);margin:6px 0 0}
 
 .loads{display:flex;flex-direction:column;gap:8px}
-.lrow{display:grid;grid-template-columns:2fr 1.7fr .8fr .8fr .8fr auto;gap:8px;align-items:end;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
-.lrow label{font-size:.78rem}
+.lrow{display:grid;grid-template-columns:2fr 1.6fr .8fr .7fr .8fr 1.3fr auto;gap:8px;align-items:end;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+body.cust .lrow{grid-template-columns:2fr 1.6fr .8fr .7fr .8fr auto}
+.lrow label{font-size:.78rem;min-width:0}
 .lrow .x{align-self:end;height:40px;width:40px;padding:0}
-@media (max-width:720px){
-  .lrow{grid-template-columns:1fr 1fr 1fr}
-  .lrow .nm{grid-column:1 / -1}.lrow .ty{grid-column:1 / 3}
+@media (max-width:760px){
+  .lrow,body.cust .lrow{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lrow .nm{grid-column:1 / -1}.lrow .ty{grid-column:1 / 3}.lrow .md{grid-column:1 / 3}
 }
-.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:flex-end}
 button,.btn{font:inherit;font-weight:500;border-radius:6px;padding:9px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
 button.primary,.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--blue-ink)}
+.btn.wa{background:#1F7A4D;border-color:#1F7A4D;color:#FFFFFF}
 button[disabled],.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+
+.live{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:14px;margin:0 0 18px}
+.live h3{margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.live h3 i{width:9px;height:9px;border-radius:50%;background:var(--ok);display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.chips span{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.88rem}
+.chips b{font-weight:700}
 
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:16px 0}
 .stat{background:var(--surface);padding:12px 14px}
 .stat span{display:block;font-size:.82rem;color:var(--muted)}
-.stat strong{font-size:1.25rem}
+.stat strong{font-size:1.2rem}
 .notes{list-style:none;padding:0;margin:0 0 8px;display:flex;flex-direction:column;gap:6px}
 .notes li{padding:8px 12px;border-inline-start:4px solid var(--hazard);background:var(--surface);border-radius:4px;font-size:.94rem}
 .notes li.ok{border-color:var(--ok)}
+.notes li.info{border-color:var(--blue)}
 
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
-.sld{display:block;margin:0 auto}
+.sld{display:block;margin:0 auto;background:var(--surface)}
 .sld text{font-family:var(--font);fill:var(--ink)}
 .sld .m{fill:var(--muted)}
-.sld .w{stroke:var(--ink);stroke-width:1.6;fill:none}
-.sld .fillbg{fill:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:640px;font-size:.92rem}
-th,td{padding:8px 10px;text-align:start;border-bottom:1px solid var(--line);white-space:nowrap}
+.sld .w{stroke:var(--ink);stroke-width:1.5;fill:none}
+.sld .d{stroke:var(--ink);stroke-width:1;fill:none;stroke-dasharray:4 3}
+.sld .g{stroke:var(--line);stroke-width:1;fill:none}
+.sld .fr{stroke:var(--ink);stroke-width:1.4;fill:none}
+.sld .bg{fill:var(--surface)}
+.sld .stamp{fill:var(--hazard)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
+th,td{padding:7px 9px;text-align:start;border-bottom:1px solid var(--line);white-space:nowrap}
 th{font-weight:500;color:var(--muted);background:var(--bg)}
 td.num,th.num{text-align:end}
 tr.tot td{font-weight:700;border-bottom:none}
-.warn{color:var(--bad)}
+.warn{color:var(--bad);font-weight:500}
+.okc{color:var(--ok)}
 .inline-set{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0}
-.inline-set label{flex:0 1 160px}
+.inline-set label{flex:0 1 170px}
 
-.letter{width:100%;min-height:360px;line-height:1.7;background:var(--surface)}
+.letterhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;background:#FFFFFF;color:#1C2228;border:1px solid var(--line);border-bottom:4px solid var(--hazard);border-radius:8px 8px 0 0;padding:12px 16px}
+.letterhead img{height:64px;width:auto}
+.letterhead div{font-size:.88rem;line-height:1.6}
+.letter{width:100%;min-height:380px;line-height:1.7;background:var(--surface);border-radius:0 0 8px 8px;border-top:none;display:block}
 .check{flex-direction:row;align-items:center;gap:10px;color:var(--ink);font-size:1rem;margin-top:14px}
 .check input{width:20px;height:20px}
 .status{color:var(--ok);font-size:.92rem;min-height:1.4em;margin-top:8px}
 .empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:8px}
-.foot{color:var(--muted);font-size:.84rem;margin-top:24px;max-width:70ch}
+.foot{color:var(--muted);font-size:.84rem;margin-top:24px;max-width:80ch}
+.foot a{color:var(--blue)}
+.linkbox{width:100%;direction:ltr;font-size:.85rem}
 
 @media (prefers-reduced-motion:no-preference){.view.on{animation:in .18s ease-out}@keyframes in{from{opacity:.4}to{opacity:1}}}
 @media print{
-  .letterhead{border-color:#C9302C}
   header,.noprint,nav{display:none!important}
   body{background:#fff;color:#000}
   .view{display:none!important}#reply{display:block!important}
   .letter{border:none;min-height:0;height:auto}
+  .scroll{overflow:visible;border:none}
 }
 </style>
 </head>
@@ -126,8 +149,8 @@ tr.tot td{font-weight:700;border-bottom:none}
   <div class="bus" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="head-in">
     <h1 class="brand"><img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAACBCAMAAADaB9AZAAAAwFBMVEX///////7+/////v7+/v/+/v7+/v3+/f39/v79/f79/f38/f38/Pz7+/z29vjw7vDk5uzg2t7O0dvGw8vBsbWkqbiYna2hjpOEiJh1f51uc4dybG2GXlxmZ29iYWJVX4FHUXA9RWIwQHS2KR22Jhu2JBqlKCFaMDQlNnAiKUYXL38ZL24WLHUUKnkXKmoUKHEUJW4VJWAXGScPKn0PKXMOJnkPJnAOJHYLJHYOI2UMG1UNDQ0ICAgGBgYEBAQCAgJTBtMeAAAnmklEQVR42u2dCWOayvf3uYn8EpFNWUSpoCZpUAFBEcX1/b+r/zlnQHFN0jZ92jyd3tslQaMfznznbDNy3NvjgeNEvdnUuH/jk4ei699ev+l1SeD/wfi8wSv6t+/fvzX1hswJ/3AcoeG4yi97sgcOOX9v6rqmKf/YXoL9K8Y9J9eR8/dvOpDWee6feJRGpSbd/SLUIoecn57IpHW9LvPiP775qNY0s2WosvBLDLre/P79GUEz0o3HX6hKfzlnTm3FntdqcI8/j5k4P708wSDx0Buaxv2Tjxx03R2NRp4p/TQQnjh/fwbQzzlps201/vkeOeiGOxoORy3l54EQ5xcyaFSPb3rT7jjNxj+d3oP2/bAlS2CTPy6o9/cPik7mDNb8/Az6AaS/OQ6Qrv8Tjxy0P5ylLfVndeNBJ31GzkD6GT2PpmN3Oo71m/zpP/t21gD0cDhc9FumaZnKj75aeBhxRt14eXl+QYNuKlrbAdCOJf8zaPC+tP5wOpwmI88b9Y0fBP3AKcyeX8CaX14YZ8CrWQ6MTvNjK21FMsxLw2KjVR4W/gcGUuU5xTz9Zn6J9vMe1S8YhjuaTqfDwB/7vmf+GOj7BwkDb3I2XtCkn57BnjlR4DQbQdumLAofUDOjNxiEcOP3I/RGYYj/hi96+I3990L4e9wF10bgzF4cx/nD4MthGMIfXjwYmJz0/57zXSvOAiAdBMFw+IOg7x/uNeAMigHKDL/BivgdlsAHVBSjAzrt2Lrw/lQeeJydbjdejjJ/nKUZjCTxR6MsRHSlAZbhj4PhLAj7Da7Gc1qr5bpwSTCbTmdJmg7nQZTFXbfdqPwJ8q25oQ8GnQRTcPJ+0KI54gza/IQexwvmOuriA35DUAzHth3bMj+U91DrdbMbj8bpfA7EFvDS/DSMl2CxWRbT7zjCkT8cAlTfBdAcJ6mq2mh1Yx8MJ5gvZjBL477ZUD+08Nx91koNhuBG8MLo1f0gaJ4SSS8EGcMVdKH3vrNiAmmwaeMDbjpKarXuxlG6WMzmwGyWjPpu+1h63a7nxTEs5MMUQFfzh0paN/OD2RzuThrFsOjg3f4THBeeV1sRScd06v8IaHCgKVD5TtYMnNGg9f23BU5tAmjbtg2Zf/eTCyC5XKOfoUnP5+k4i1sXfMS64faXmT/M+mTRfLValTjJ9NBo5ou5ny3b8FTV9/5UAYzC+ETnE0DD/MPxY6AfFOIMoFGkUaa/6xImPoqXX2+ieHTamvS/D70wqbWMxmmSzNJR3L/s5stGdznyx30NQe/d1SiYzRagKJln7C39PaBlw4Nl9ZOsusrJrXEOOvkB0JTgAFv+jub8zBxoXXl4KLt+dQtN2gE3i+c/8sqMUZiCQs9m42VfvrCgVYAikB5GYNFiKQCLhskCNCfJ+h+RZ5h7rWXX+CzQaDghAx38gEbf5wm756c8WAGFbioPR08DNt3uAGqnrX8wlOqHEYKeJ8sryKrSnemNIrBocS/vMEODZA6kxx8CXXnkzBFGEtXPAV0Bix7lFh2E1gdBP3AScsbcxgtF38i5fn9ylbgnrX0gciHQYwB9CxkqRTwC0Pwx6BncHj/ry9wHnEr8cZ8Neohu0sdB85xMnF+eKBp8+Y4OR/38OpFr2DiAtMh9HPQ8uG6bEmf2R7FRcliUVuYni9li8SHQFU4FxzD6M0HngTel65A0c6C5+0v617DJpq2GxH8M9HwG44YI8PVuCIFWeXFnoBP/A9KBAu2Fafa7QLc+Avqek1mCg6WRyOH4Vhce7i++EcPGWNxpvjvvTaAT4hzcAs21Ys+slkHHfgJuR/oBjb6v3ZkjWBB+F+joI6DvORETHBhys4GRin7/cPlqUdJtp4Ppae2dpBE0OmpvgX40e13jyKLjEYGGuPC9oCXmtGefCLqag55+1KLRnokzM+ecs3JJOPI3o9udDrh51jtt+p2gK5ygaer+uwx0OpvN32/RPHDuhn6QvGHRfFWiIb6RDOSrYn5hjTtaPAg0oE5KoPlafi3/JucX5j+/wVmAB6A73bGb73v7CHo8nU1vgeYvfEVpxSEq+7tBwyWN7iiYQzgJIU5VEqo4zoyhXJETbzwtf/TIamVvEAw0jT1ovlq2+cu6oX2jggoxfmIVFcrY3XBRKO1h2813OQMHi0av49ZD+FKUjTOUgX6vH33HPWr9kR/A+59F/VsxuNRgeXJNvZ0sUTQDqyimaTRKM+9ObfnMorFEu39heDFca2gXDSfnDIEKuhyE+i3OzBkkJ6/zLtIF6CS55j+ATMj8hTVnGWI4+U7Qd6A1/WUUAIDFNBi19jUH+dhI74x2t8+y4f1uy5C5S410aMya5bp9yp+HXrdt1nN8EEy4PmGGXxmCRgtumG6/j2nzUd811TOrvuce9G9UuKIKIYoHOXYPb2ZtKMHkOO8hTV4HgU4vgxarRrfXUo+/UQIdvAN0ldPcfjz20wUa2nS2GHkxVRjirlYK6zGpEsdhiCbp+1EWxl3zvIcTtF7W2l4cx1ihgCvhwhAvFCu0dvSHBWjwOioiJzfApcxSnEtwbRh7xgkWsGdMjNICSE7081UH+iJpp9N5R3WSgZ4T6OUl6YBYZbBsq8dWAKDby1ECpN9l0VXOALJ+ECTDZMESazD8cRgewnrUcDdE/stlFkXjYTANxmHsatxZTNBoe8vYC5ejvhdloEb+eBTHLRCQGq+abu5zwB0dt+DV12EmLZkjMpsOE38Ue22l/G5yzkiaJfqfnt/HOU+aguvh2PqbNn2QDnTUzi+v8KDGXks+nsGk0aMEwsn5e0DX4GbFSwCYpukMISyL4Rk5aJFTjH7m+1ncd2H0wywA0/dHy5MK6yOYsxdnMBn6LdMwLBeMFQKnaZB1DYnjTDToPNeB0sFp/Rie1ccpEgTwLv1kOIpbUmm9eXioU+HqmUoqz0+4Dn6vyw//3Uql80Uwrllo0kBaepdGLxZJihZ9jkzkG24ctk++gUkycO/eCxqTfYQP3vNiAX6X2yrqC2pxhdoKY+SKxRpFbZj9bDacDSHCP6r8wQoEQjAawVfrCqt49LMR1q2GQF4zWi6ISRAMA7Be8DoeDbwY7rE3isOlH2RBkgzhFWuH+uZDkbB7ecm1g2Wg/7v8VhQdllS9XsxDQdAtB5Omti6Ib4PGWHoOoL1zZBKmUWP37Bu1AvQ706QyDMldgkxDIOGZj1KtBt7d4+PeXWzHI1DQQ+OL6o5BZYbTMfgoVbFSSJbUCsNoFLvkaUioKlp3mZJShH0sCPW9zB8CT/hC5rb6sbeEr2v1utHqwiP9ZDFMo2VbKVLJD5xyxJkEGoTginAoTQcL4e1Dxhgr4zbZNCe+w6KvgK5ikLH0Mlc51mgeQeNiOJ+nH8h1tJcRrEppfJQ1YW+gvcyGaYgVnirP84/w0xQ3C8CkF/6yu39bgmSCEkTEmXznO7jQjGE1Bzv2w1EXi29ua5gmCVh1Mgxhbe0a+c2DuRD7yXQ2TDKvqDzcE+fvlENi2SS052sCzXO6w0a7aHbkwaZtgm/Xb4aIJdAZgBYlUazREMUqvrsGWOE4c9VT0FIOOnkn6AoMAA0ReDrG9FStcPuYcLTiLKMfI+699kfQ7PlssYDX1c6XCJEz4thP/X7jMPVBdFzgNwStGNGEqKsQ6GPLwXSxGMd9s55XbZnvn2BVaLy0juyZur5eipLKt7p0dSGsWw76zh3HKm4VL8iY9ugA/JukC40m0H3pvF6YRUmQtS+BJulIPmbRWZRmKcqucJTf1TAHEsHKKB15kPF4niTZOPaoWgm23sBSMghM6ToMUpchhAEQoPQ1kiLBzWAhhVU3wMV2H2CCj93NEuA/BVHJl31K2OF4oQ67F1YjvNFdpzbJooF0odPAwsS0h4Nfkt62aCyCh8cV8Da4+Vk0nw0RdO1cOtDrSJIPgQ4z8DyiY9ACBBmgKSAIR336sDr0ozQNFvNoSV4PBDStkRfgnRWOl8flKA3QcXPr4OHVqjKIDoBeDDEElaqlZ2x5Y/DyZsEof82Szgoqz7k+s/aCb7p4LVYRiTRAtR2rNP2a6OMRaeFt6ZjNhukYgoQsjGB2w8iybAnubDBNs9YJaHCz9qDTj4AeAej5iUVLEnjZ8LPi4xIflXWybDFfpMwdekTDH8792Dpdrr3RGCU6bimVeyQPoDGrkI7MowWqBrduPMXJG+WrUT0PCF9ygybgT+jdXVsNBWbTFHkL+3stmpie7iB8/s1cByYWfQ/blMDtRM+TBgRUszQ8BQ2K+SOgwfSydJGgRgglz1glg156J53HAueG4zlMtXG2pCparZUNKfVVKSf2ao8wIbAnGg26yu1BJ+O8QaJc3/H84WyOgRB7zawliTSDfn8m8wab1rj766QtNOhO2zYLrDwvmzZLMKnXbLoIwQl0msUUV9CIIvgNLCWBYKB1Jh2cFYbph0GDrsMKmpZBwyKp9aPID5euxKPHsR8S16bmngW8qjbPw6oHjii8mFNf8xGkJ1zGfViMHpmWwOo4DRLylx+PQCveGNajYJzFjBE2QRdF7yLhzxZE/UY4WEfXGRw62yhIC5wM6gEm3THVK17eATRMtcg9Ht3+CNbC4SWNRtAft2jwVAD0kUVX0FADiJeyVu3s+jBK5rN5Gsdd+pHLYQovpiWdxUOq0YJAhz0pgQ6wMRBBV4+Tu30/mC+CYA9aKdrNn/ekyZ8GmxZvksbIG0jz+wQC2jniN68UAkqg/bCvyifDcEfpcHoGGobJQKcf0uh4nCQw+csaDe++m00TvGGHVTgfXgYRO4COoj6EJjVQ6GwYeNqZzdRYf1vhBTDQU3hG7TRR14eIBZb9OAfNs3psvh7mIp1vpKiL//HXSXcoQwpRinTS7eFcSTCVQWM++twK+ym4d/ULFj0OsJHsYxbtJ8EMI8MyaMMDdzlJ/Qh7gGHExQghxoNFIvCpbs41QInTWbmP5yhxWq1yx6BnGJeceKX9cTqHcLaw6CJg+Z6r88GusaHj4X/3t0k72ETDYkz4vQGKguphXOTBFsOESlkxLDNCLpAYYPAojOgwx9dBoyWq7wadjdCio2PQ1miO5pdk8fHAhYKtF0v0SDhMzAbZ6QpXJLz5kr/nZj5WMvDSC6DnJdAFabbJjfy7nDll/t9QD8cptSsJHG69ANa2fon0AfTlvg4sqNJ6fmpF5miMD5p/yKIzsOggGB+DbkWgD8Fw7LmXRq4iEHODswd3I+s2bld296ATBM2fg8bv7EFjUukbCw6f8gbS52LDW7N+9X2JbEUEWQbSRTAuaRa62I6tyfz9R0E/8oq7fAO0+nOgYaIPpwtMdMgK/nc0isUCXmgXfJCUQNfeBs0Ww5MNtLlFI+jDOxVZ+u6pAM18aUZaEa/509gXRikOp60V9Uueox4E/NJ5vbMsHRdjPIkzvTPpgMt+FWiu6sZDqgUYt/FJfQgqIX7vvw80Sod3AfSYgT685ntezLciE+TvT/t1EYNx8bpNN1iKw7EaQq7TYH5o5p2Odd7tcWzRF+oEImf0ltdBw2LofUijsXBSAg1YuvFwhvnkVo1/5K8Oru5l8zRN3g16cQV0egIajUlhpaznojr7wpKm1LJ7nbRO4aDdKcWDqoELInzpbCvzsUVfBK31Jm31mnR8GPTJYniH3h1tWIvBP67cKjt6WbBIIazUbid+C41ezC9JR3QJNIvFWWsj44wFreenkyb00xVRMmmPlt0pDlxCc2jSJhe7eZr2KEBPr7Yb8IplaVKVu2zR7/E6eP6uZNEnXgdYdIbFp0NG7TpooLcYx290PZdAe/UzrwNBz9MT0PcP/2m03401dbwUGVPSafFqclrCXBL8au7LCGiWbYzFD2vkZdBX+qPvTov+dwKBnlNk+JZFV49C8FP3jpNc6hwfhje9F+z3jeaLZBHg/g/+LdAJBlOXQI8JdBgfP8f9/yRm0yzdkUfiKCM3yi2ygeXCo/wGeB56m1p6DZXnroP2Lr6FUkpy31OFS+R4xiJD761t6Ioi7dOkKaA6zt5V3DCgmrWnVW+BBo3GwCoIu9c7BPkc9DLB3u3LoOcXQBctYU+sjfT5uYgVX5h6XJjnPLU52p2j3CiPxVqMZM635rPIMAFvaO5fAX1pqwbmJgl08jZotdUylD3oxSI5CcHbIXZiBOMbPYn8Y41TPPJOpijSl7W8srdoAA3OxQdA5027359f9sEh2wZOhYAL6iGSGlO+45gzVmAQPs99HHQpWjbz+DK36PnboMW8L4RnadILoFshdggkfta9okF3LPDqhj5Wa+dh+9rLq+MTEOgUtGP+EdCHNsdcNoqUKTYfXCLNyrQd25RKMamIS+Eln2MPGqRjMX4DNOhyn/Ypl6QjfQt0FXv8i2LsZdCmh7svE5Lui6Ug/j/T0MDyYx/bCgI06epFcXFRvgvQ4Al+BPTepp/y7PRLXnahDZ2nvoegmKzQ0iwX1UC1bUzr6TJ/LakEFr14w6KrnOLGS1chj4mBRu/uDdCSbHqjoo+ihe0G81PQKi4SQZqMM7d+yUWWHg2vD1ZsxT56J8MsbsvnOxoqnNIewJyoEugovQ56trgIutha8ZTrRtFQQ1tnT0ou2PFP+edy1x0v62yvp3mp3ZeBxq7dRXATdJUDZKFnsuwN02hM3s1ueh3YrjAK3cYBNDwmPgYtu5g9XSR+FJpV8e5cERpu7LVx6+mI/MA07psXXOm7Vn+wt2hYdNPxJT8aM5WL5CLoPMGUF2qfCrvOSZdtGvewnGmERKrNiok8d92ip7NgeQM0L8pGPx4VyBC0v8BGMrg910FTid8LWwrrgCHQ6THoO9pSmlI9nfq/+HNvbRlSegjcE6xujyPMvZyt0PDyPEPMQY/T2fxiriOcXweN6pFvy3p6Ljl5rOnxYU8ac3fUdGDr5QNLFROTpM6ZB70H3Q1x5/R07t/s+McOj1HcZsrBQM9nQQJz/nrAUuNqLc87aC+CTsHSDn0d9NSNfpzCTUuzEElzZSePGmliUCz8EUY4SqfTxTjKUGS4/XukPnODJRnzxXB8LXsHoKcLf3QZ9H5DJ0WJeYI6dz0OpHmszzJnWTiKE23WGyZd20JIoIPg1taKR5y4yxjnbG3v3kUJjuC6RtOW8QiL/nfiAXSGoAWh8EmqtHsgongtWy67JtyTfFfFY97BE2NjB1gqIB9hKSalbTBwnSTWqlURb6LS8kJ8dZV8CvgspdA4dgQJ9PQG6P3ZM895ixgTkCdGOvc9BOCMhSzHPFJtjRp4bUO+ulcTpANNeja8ClrkZK2/zLJ9O3OFIkPsu8E477JF17BZ2Uunw8itVyo56DFQwhY7dr8qIrsfWp4BzdIo67fUO+pBkFiSxl0u42VLIlM1vDDLknRB+2AsdV8PUo12mI1iV0WLwDQVWvQ0OK0Z0mKYW/S1WcgON8g9j6ei6JIXt3KdNhwqWoFjJ5QqATYVbK+VDPN9hsmMQHsX7gaPjSuy2cfOsLitMml8xMKLjy0SsyF4W/yRYLJsWxX3rGQpuGOjVrF0gRiD4QY+IqlRyKmBXy5VFcuLsYUJ4uY0Ct1iV4WqmW1vGWZLl4JcXsCNM1kKopAGoDNu29Aa9XpDM1vh0veXfZabPICOLoDGhX/hh/H1dYUlTfMGBLLp5yd2ysG3+j13D0GJTY1JVl3cv23qQeiwxo4r7QYiD6D9hLo6Qtwby1cr1XwIfC6DjZYXj2Fqj4pFjK+oYJ0BeCrJGCO6S0NrYe8cneZQbNbRwigF5zsJseEazdboDswads672Du9AFmYgwKHXbdlmWbLdb04g6Wvr0m1PGMD6yI8aZpB4BdEmdelZuB4mY2H8JyV6n+3QXOcF9JWsiyuXz+ZgGya3A5WAnhm2y1eSKepNIjp/XLKmedl1r9kXW8pFWGJQdAQsSQ+mM6pd3UnSUBslA3nC9y2lldAJZTOKAHrBNJx36iV3d+7qiRrRqsfYgfcFKiq+9ilH2ezBQQnmddqyLLW6g162Ilew+MTQDjw1zzAzRLYvzPKssj3I/AlindUkyBkivCGLOa0UyJkZ+SEYz/DTtRK7nv14/ECNDo9auZjTWZhApzTcGlebd76j53hSMH4E7NplkF9oTIi+XCgEWXOIp1qBQJtXvO+qhL1vaV4XsdsOoTpaNZVGgr7owF2BXTGfoD+b1cGb4wXYPlRWwN4xwnOhAD81VYLYjf4BQMskbqUwyxCs5omcZffNxZg8918OEWb7ne7YIpxizLdIL8uq8Om4MpQh9QU28lTINg/SouChkX+HJYGvAAvCYbjDPR5lOf0eIl1FMNcGvroJEm5iVXgVUttPAtqnvojDLyubeO+5/+jvRZPLDv9XLQ/PlPBVqfTq5zj7niNSli2KV6PKEACcM89MYPoNhv1jzto4jiLIz8Yj4EnOFlFnrwFjKKARZQJzvYwP1kM2wWYmY1hgPsXLdvFLKlUDQ97UGFWY1dWHC7j4vggPAuJ9q6kWDydUvYIz1TLjs/2qJC7HI5nwTgdk89DF8XL/mERknA3RTZO4Q7QnpCD4yHBY+EnjNNoFHs3jgnE4tY35nsUyWnWYoPp6W82BSVKmXPDYg2m6pVtmpLaMMBJHflJMsYtHthoN8TZyLoqcEQRHhKGIxqHIVX11IZmuIApmkOQBU4hGBVM8HBEh4uNoyjCc8VwU1UEj45GYbw/fQIWVQv7m4fDOXaNx0sskTEtqvBcHRY+JD3GBsUpmqqfLXGz0FGwiDodw2SBH5Vi/TGg47ZcrfCXVMPqLbFVgY6Kg4jSoDkOb9YwWx5YBypNBJ65176xkTHfF86q4kVhiw4Me/2WZ+fKuaxmXvy+eBpeBcyy64JzPMrIMWXtdmNkNo7oQDbijA14+D925bHsWrvbA0TFGWLFwLcWxrk1Y//efj9QX92HZ7iZC67wwRzHYM5eq1Qhw52o3RE2cqQ+yMKQlqyupZxkPyroM8MiiU+TzOH+Z7HXxf7z3G6tbm/gxXDbYXr14X+v18ZJA26u2/NimnUwYviv121dt2nuXs9tmqkGqQh5Ht9Y5H143aJkkHB0zP8uHoaHe/8G8GJoFH/eGN1ut4Xe32On1+3BP7rsa/lw4T+3e2G4yKqcSDRd0O8YNdpq3JUpitwjeM248TLGVXDYZ5svL6VNFQNXAQ+3aPbdtqk+Hg7WbZydTGlQmMxLJ1+FxeTGZ6vkpNGtKwq2e84Q/B1qVxxbCGGYV3NrFd14Y2gw9n/RGkjsjqtrl0eDRr0YarGonrY4NWAOg/dm1DnuNEBGgYXvtl23jaurwl08IY8ehPuYrVax6fjXn214/z86NpN10xzicBQO3L75UFoI2yQc1rt2Jv7GUdpQfp7qzJ1HRWErVbXyZhny9B989XTwb37nik0j6ae80pJvW2bCUZqiAld0J906Kl18/8DtQ/nbhhcsCGxDUa1aqwmHF157fCy9CxqP53EBS05cOdChUhMl1nwriTcbv0RRkgRBgqs+6+MN2EkpdFIY1bdyznb7KPiTGGdHl/g/8cDn23AqPF/9A17kA+g0a1PHtPT3XKDbWmnJEWWDCXRTEf6d/f8TNi3V6ZRSVjlk9mzIj3sxogZShwn0v/Pof8qo5eIDQnLOR1lQtp0F4/G/iDPP/4kaxxcntBUGfeyrKk06wKqj/TWciy03f55J32MZEfNJuBJ2yptjeUFusk1vpszzfwtnUVGVP/Rz7DCV98IMer+RgkUqJvb8dzpNhftrOCumM+hZ9Z97ms+5TeyYCSYdRqkWS7uDUDgs5W/5sCGeV5qTzXa9chp/4BS8f7jPP2rvm17yoEWqqWDRW/trPtRJ4rTeer1erScW9zMfj6TJnzXfyKRfm/XyFnRaCJ1O26yI/F8DWp+sVuvNam3/uNoJvOGYn2NbKB5NXS9/vi940NSE7ji3cv1/JGiw6NWq88MvWuTqzqTJfdbnhSmUfSm3KmkdVoxV/qJIReT0wQo4/4R04GF/KwD9SWr5cLLYCqymQgdI/0WRN8+pDlj0bt370QALgh1j8LMSf9udLh92wLbd09bNvyvDwXMNezCZOD/8EQsgHL3NZ4I+eb1yk51C0/zNnG5+nBEvnNx1/uLHH+lN/cwfFUTx4lPz+I3jI2x669XmEzX66KeLxb5NS/38tATiI2A8HfdWbqoU9oMvhE0ovUrWjFqWNgG5kWEKF+IP6RTe/nw5oTg9ChbC1XazmVh49Jbw+fNPb7Oid+P3LYTs2Ft21N+V3S9yQzuO+MR6Q33P3eSwaNZQTp4Z/w5PqZeftNFbbba79cr6HW+ZFkL0oG2N+2QPWpLVRkPTNB3PE5ZMu+f0bNwNlGeGdL2oRaq0Z7fX6+VNFwImDjoOXN9p63L+ADAQ02yysQ+y8DvwxK+vvZ7dPMGsWU7vddBz2M+EYfZW691us9708OMB9c/mrFi0NbljcMLnchaag0FvgGNiq7ozWW3Wu9XEMchzxyP4Xul7g8mrycn2YL3ZbAZN/B6mbwcQmsCjV5OBk+8q4zn7dcLGoFjNQA30zmSzfu1NdnBlvcRZ7UzwaxjfDDBaEDgI39fr7Q7GBlzxta1+ZkiMTRF4Tsdv8KB5vm4Ptlswos160B7stvA2VwjTZFUzpdmZwBuHmHpiyPaEGRs6brhkwRRfATfNWQNFtv8Dbo0FLgMFLDloHk/4hX+DGwJ/rre94vwAQdJ6oMaOplr4xNtBUxLgPg1Wuw2CXuEdtlVe+MQ3T/uBsKL1+bl+PFAP7HK1Atqrdc+2e2hK682g2HAnOxh9rHYT3cLrgOlmgDsygPNqtXnF5hN9sl3RrWFmqg82yHnSzkFzJn7fQcGxVpP8b5QUeV2v1gOIhRUHHrFev2ocX9d0Z7tBe3Z0ELTPBQCgKQVt/45cvwgBxhYMGcxo49RluUEauUYctFTxFtwE+PfEft2tNmSqkwYnKO0VzPBVG6RNkB0w+c1Az/cs1m2YAkCuTc2fYOMDmDHgrUmEFp7AwlZkgUcvbrW2wLK5zoqi9jaeSajYa3gp23wx5D/XyiqmZbXb5m+JCHkOpj6Q3O56JJ/GBOO6zapJ7xLm/WS9hfcN5juwX9FWUTqAHoXZBjKT25gWXfUUJh6KvdniI2yyaEGAQHG7BcMVMYWxAaITFZc90V6jImm8KPL2Cv++Bh2SRMUBfdlsALQsil+pGC3yHXiPG1Rh+LsgyKCx8D53jsxAw/K0W6ORAV+MrsHDlWGyw1wHKacNanwTOa0mhUMGxr7ZbhhoXN5QdF9lKhc5OCtWNjbFa5M1KDQ8KbjSMGtQsBzqgrM3uBqufktk+DtzSCLXAYw79p6xDgWWBha6m2h7i0YfYDPBw8pU8Mawh04ns9/18GYInDaAf6zYv3LQuxw0GugKF1Bce0TUCFx28TrQeFQoFf2qBj4BiA31U8DP3/0u0L833eaABcFk7bFapdBc4WK0WzUL0Ct835teg0eXXqX4xNrispiD5rUBaTypNE+gtwRawO75Hs6WXY+oczbY7W49Ae1pTLZrBhofo71C0O2wjuQ2+TaTLwmaTDYHDdaKoLdr+8iiVzburOJZbC33dghsnVs0GCQuoMBGOAGNDwfr3mwcFh3Z6LisJybcKjBtEJgOwQX1NpqaWjx882VBY4SQgyZsFDE4ZdBbeOMSSyLhejfZwQK33jo56Fe06DWizaWjAI1ANzsUIogLX19fJxuS8zbHORvEucnLMEKRENmDXn1Viz4CjRHDtleSjs12cjisADw2AA1mujuABuPcrh2Jshqk0et1h7kgW7xt292kPOBbAzaNcrkgxrkf3sZcx5fU6M6ZRaNIbl8PFg0aPjEOJ1lzOq5pKAgH0CDEG/AahAL0BkFDnA5eMXKbNA+N2tgGLdI8We9BlxwAmhDbrwy6UYBms/r1WDrKoDUS2PXuWDp2ucpbe+lA0CgdO3LvjnIsE1g9YQV+PT+b1PqyiyFEcttz0Lu9dGzOQDdAOsge96DRM2GSTaSYeyehdJCzBgGLJEv7IYJF7/D2ric6L54k1DAU3X5JjT4BXb8M2iyBVifrY9CUiSpClD1ojLQh/MgfftiNKULUPcB1YbuFsPv05HR8+OaLgt4cS8eaQDvXQcuD7Qlo0PGcjXiQDgxRmitaagGoWKq2YOiCEc96O1DK5Zz84V8X9MGiRQrTQILXVgn0tiwdQMSGCAYokR8NQQkGLHQvBHyEdYgMRV4f0MPXvf2nrcBa2hDoBqCwr63jcFgq7hOC5nn+a4FeM9CU++Wb6GaUQ/Az0OR2bIHToAx6zbJKBWhy77D5YEdLKzYuiQKPVUmj1+TIFcev7yb44SqCAGoimqaUP3zzRRdDNCFw73gMRiT0ztYrBjFPKp2ARh1HV3k3YeEGxJIsL1oyyfXaYf+ySTsgSim2EWuDAd5DFG9SnF7enSVYE1vm2cNROgRZElT56+xyIOkAUIhSAlWVqUKy3dj8NfcO03AQ8K3RGnFyyxbEe6t1T80T+lae0c5dwQHln+CXo6kyrzYHmzZWaJTBerVF0JuBpdXVuuZQRQHvLBZ8MCHOmY7OSV8INL2xHSaF8GQCjPpWVO7g9qDX20n58Apw2xzMWlCYzcsOLISUm+ZKoNGiKT9toYuC1bDdxLGd3mr7igey8ALmT0HqN+vtetBzsKDYJCHCUBQun3SM5sSROeErgcZwGjPSTRDQAaaDV6umyA5mkDHhtiIv4OhB2itctO3hB+Q1sX0UHisUoCcHi8aTZjo7ytmtt/A0Oype0Q2AWbHGtAYWbTADMiFtAVXHjBWWtiaroxX4K4DebjDonWxWk8EEndvVqk3CwQuqRXmg1QpWp7pULheA5W9WK0eTmwO0P6touylA5xaN5DrY9YgZf/wD5g2rLvIiPDdab14gs4tCOswh1o8KT/plhCNfDFGGB5azolULtJcdOovWVUoFDeyjlUl1QGTWE1DU7ap3OK2lDDpfOhVrQJ4E+hhOOeZuvk7QIcGv9wy+OHmIs6gSvhq0v5rXsdpst1hhUZsOVroHh6PJZLPJzg9oGkazqZcPagGT1x26DwM8kqj4oKkzi2bHWlnOAK7s4akBpWMfcctZb4BfN5T9zh12udM7POkXWgyxzo2F/7pmGLomv/cdSnVN1zU8k0TYhxzkEIK7eADN7F/LO7/4o5/NyXXqKjjbHaTI3BcbItdebdGPHjQEaT/99yjL42Rh4kv+XhkPgMbI0Cn/kOIC6aQZdf8Tj+5svpP/64HGtRAtGk8YkKT3d/vxIl1faGvdWQ3AdTAn221RnD1E7eLlZ+bxZIPzr/Nfb9u7mGfaCfRPPZOAiaKBCR4i+IebVfurxdC/0qJ/4nkwBkRP0Ja1V/AQt7+pk/z/P4sWOBMd6rUjaz3wYnav2r/DGI49BwK9RdC89FMWrWKwCBGk5mDvryP843zEh6eABQIxmOtXz0N832hTw5ii90BBeo1/Bn0yGr0tddute9pPPpPirDabSae32q4dneP/gS7bs4rx7g79se1u4Bg/1/muWoga4ul/p+WcrWB1Z3AYk1sfOv6eZ+MU3bKaDYXnfr9C/x+eJLPT3OnDwQAAAABJRU5ErkJggg==" alt="ELtech project" width="134" height="48"><span><span dir="ltr">Eliran Krispin</span><small>ייעוץ ותכנון חשמל, ייצור לוחות חשמל, בדיקות ואחזקה</small></span></h1>
-    <nav class="steps" aria-label="שלבים">
-      <a href="#request" data-v="request"><b>1</b>פנייה</a>
+    <nav class="steps eng-only" aria-label="שלבים">
+      <a href="#request" data-v="request"><b>1</b>נתוני לוח</a>
       <a href="#review" data-v="review"><b>2</b>בדיקת מהנדס</a>
       <a href="#reply" data-v="reply"><b>3</b>תשובה ללקוח</a>
     </nav>
@@ -135,19 +158,22 @@ tr.tot td{font-weight:700;border-bottom:none}
 </header>
 
 <main>
-<!-- STEP 1 -->
+<!-- STEP 1 / CUSTOMER FORM -->
 <section id="request" class="view" aria-labelledby="t1">
-  <h2 id="t1">פנייה חדשה</h2>
-  <p class="lead">הלקוח (או המהנדס בשמו) ממלא את הצרכנים. המערכת מחשבת מפסקים, כבלים וארון, ומפיקה סקיצה חד-קווית והצעת מחיר.</p>
+  <h2 id="t1"><span class="eng-only">נתוני הלוח</span><span class="cust-only">בקשת הצעה ללוח חשמל</span></h2>
+  <p class="lead eng-only">הזן את הצרכנים. הסקיצה החד-קווית מתעדכנת בזמן אמת לפי כללי התכנון שבהגדרות ההנדסיות.</p>
+  <p class="lead cust-only">מלאו את פרטי הצרכנים שאתם צריכים לחבר. תוך כדי ההקלדה תיבנה סקיצה חד-קווית של הלוח. בסיום שלחו את הבקשה, ו-Eltech יחזרו אליכם עם הצעה מסודרת.</p>
+  <div class="banner" id="fromCust" hidden></div>
 
   <fieldset>
-    <legend>פרטי הלקוח</legend>
+    <legend>פרטי הלקוח והפרויקט</legend>
     <div class="grid">
       <label>שם איש קשר<input data-k="customer.name" autocomplete="name"></label>
-      <label>חברה<input data-k="customer.company"></label>
-      <label>אימייל<input data-k="customer.email" type="email" dir="ltr"></label>
-      <label>טלפון<input data-k="customer.phone" type="tel" dir="ltr"></label>
+      <label>חברה / פרויקט<input data-k="customer.company"></label>
+      <label>אימייל<input data-k="customer.email" type="email" dir="ltr" autocomplete="email"></label>
+      <label>טלפון<input data-k="customer.phone" type="tel" dir="ltr" autocomplete="tel"></label>
       <label>אתר / עיר<input data-k="customer.site"></label>
+      <label>שם הלוח<input data-k="project.panel" placeholder="לוח ראשי"></label>
     </div>
     <label style="margin-top:12px">הערות ודרישות מיוחדות<textarea data-k="customer.notes" rows="2"></textarea></label>
   </fieldset>
@@ -155,13 +181,18 @@ tr.tot td{font-weight:700;border-bottom:none}
   <fieldset>
     <legend>הזנה</legend>
     <div class="grid">
-      <label>מתח<select disabled><option>400/230V תלת-פאזי</option></select></label>
-      <label>זרם קצר במקור (kA)
-        <select data-k="supply.ka" data-num>
-          <option>6</option><option>10</option><option>16</option><option>25</option><option>36</option><option>50</option>
+      <label>גודל חיבור חח״י
+        <select data-k="supply.conn" data-num>
+          <option value="0">לא ידוע, חשב אוטומטית</option>
+          <option value="25">3×25A</option><option value="40">3×40A</option><option value="63">3×63A</option><option value="80">3×80A</option><option value="100">3×100A</option><option value="125">3×125A</option><option value="160">3×160A</option><option value="200">3×200A</option><option value="250">3×250A</option><option value="315">3×315A</option><option value="400">3×400A</option><option value="500">3×500A</option><option value="630">3×630A</option><option value="800">3×800A</option><option value="1000">3×1000A</option>
         </select></label>
-      <label>מקדם בו-זמניות<input data-k="supply.div" data-num type="number" step="0.05" min="0.3" max="1"></label>
-      <label>מפל מתח מרבי (%)<input data-k="supply.vd" data-num type="number" step="0.5" min="1" max="8"></label>
+      <label class="eng-only">זרם קצר בנקודת החיבור (kA)
+        <select data-k="supply.ka" data-num><option>6</option><option>10</option><option>16</option><option>25</option><option>36</option><option>50</option></select></label>
+      <label class="eng-only">שיטת הארקה
+        <select data-k="supply.earthing"><option value="TN-C-S">TN-C-S (איפוס)</option><option value="TN-S">TN-S</option></select></label>
+      <label>אורך כבל הזנה ללוח (מ׳)<input data-k="supply.feedLen" data-num type="number" min="1" step="1"></label>
+      <label class="eng-only">התקנת כבל ההזנה
+        <select data-k="supply.feedMethod"><option value="D">קבור באדמה בצנרת (D)</option><option value="E">על סולם / מגש (E)</option><option value="B">בצנרת על קיר (B)</option></select></label>
     </div>
   </fieldset>
 
@@ -170,20 +201,64 @@ tr.tot td{font-weight:700;border-bottom:none}
     <div class="loads" id="loads"></div>
     <div class="btns">
       <button type="button" id="addLoad">הוסף צרכן</button>
-      <label style="flex:0 1 220px">דוגמה<select id="demoSel"><option value="lab">בניין מעבדות אוניברסיטאי</option><option value="factory">אולם ייצור, מסגרייה</option><option value="office">קומת משרדים</option></select></label>
-      <button type="button" id="loadDemo" style="align-self:flex-end">טען דוגמה</button>
+      <label class="eng-only" style="flex:0 1 220px">דוגמה<select id="demoSel"><option value="lab">בניין מעבדות אוניברסיטאי</option><option value="factory">אולם ייצור, מסגרייה</option><option value="office">קומת משרדים</option></select></label>
+      <button type="button" class="eng-only" id="loadDemo">טען דוגמה</button>
+      <button type="button" class="cust-only" id="clearLoads">נקה טופס</button>
     </div>
+    <p class="hint">צרכן חד-פאזי גדול (תאורה או שקעים) מחולק אוטומטית לכמה מעגלים. מנוע תלת-פאזי מחושב לפי זרם נקוב של מנוע 4 קטבים.</p>
   </fieldset>
 
-  <div class="btns">
-    <button type="button" class="primary" id="toReview">הפק סקיצה</button>
+  <details class="eng eng-only">
+    <summary>הגדרות הנדסיות (כללי התכנון)</summary>
+    <fieldset>
+      <legend>כללי תכנון</legend>
+      <div class="grid">
+        <label>מקדם בו-זמניות ללוח<input data-k="eng.ks" data-num type="number" step="0.05" min="0.3" max="1"></label>
+        <label>מקדם תיקון לכבלים (קיבוץ וטמפ׳)<input data-k="eng.corr" data-num type="number" step="0.05" min="0.4" max="1"></label>
+        <label>מפל מתח מרבי, תאורה (%)<input data-k="eng.vdLight" data-num type="number" step="0.5" min="1" max="8"></label>
+        <label>מפל מתח מרבי, שאר הצרכנים (%)<input data-k="eng.vdOther" data-num type="number" step="0.5" min="1" max="10"></label>
+        <label>זרם מרבי למעגל תאורה (A)<select data-k="eng.maxLightA" data-num><option>10</option><option>16</option></select></label>
+        <label>זרם מרבי למעגל שקעים (A)<select data-k="eng.maxSockA" data-num><option>16</option><option>20</option><option>25</option></select></label>
+        <label>מנוע מעל (קו״ט) מקבל מתנע רך<input data-k="eng.softKw" data-num type="number" step="0.5" min="0"></label>
+        <label>גרסת שרטוט<input data-k="project.rev"></label>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <label class="chk"><input type="checkbox" data-k="eng.rcdLight" data-bool>ממסר פחת 30mA גם למעגלי תאורה</label>
+        <label class="chk"><input type="checkbox" data-k="eng.emergency" data-bool>הפסקת חירום (סליל הפסקה + לחצן)</label>
+        <label class="chk"><input type="checkbox" data-k="eng.showPrice" data-bool>הצג מחיר משוער ללקוח בטופס</label>
+      </div>
+      <p class="hint">ערכי ברירת המחדל מבוססים על IEC 60364 ו-IEC 61439 (ת״י 61439), לכבלי נחושת N2XY. התאם אותם לחוק החשמל ולתקנותיו ולנוהלי העבודה שלך.</p>
+    </fieldset>
+  </details>
+
+  <div class="live" aria-live="polite">
+    <h3><i aria-hidden="true"></i>סקיצה בזמן אמת</h3>
+    <div class="chips" id="liveSum"></div>
+    <div class="scroll" id="liveSld"></div>
+  </div>
+
+  <div class="btns eng-only">
+    <button type="button" class="primary" id="toReview">לבדיקת מהנדס</button>
+    <button type="button" id="custLinkBtn">קישור לטופס הלקוח</button>
+  </div>
+  <div class="eng-only" id="custLinkBox" hidden style="margin-top:10px">
+    <label>שלח ללקוח את הקישור הזה. הוא ימלא את הטופס, יראה סקיצה חיה וישלח לך את הבקשה.<input class="linkbox" id="custLink" readonly></label>
+  </div>
+
+  <div class="cust-only" style="display:block">
+    <div class="btns">
+      <a class="btn wa" id="sendWa" target="_blank" rel="noopener">שלח בוואטסאפ ל-Eltech</a>
+      <a class="btn primary" id="sendMail" target="_blank" rel="noopener">שלח במייל</a>
+    </div>
+    <p class="hint">הבקשה נשלחת עם קישור שפותח אצל Eltech את כל הנתונים והסקיצה. הסקיצה ראשונית, והתכנון הסופי ייעשה ויאושר על ידי מהנדס.</p>
   </div>
 </section>
 
 <!-- STEP 2 -->
 <section id="review" class="view" aria-labelledby="t2">
   <h2 id="t2">בדיקת מהנדס</h2>
-  <p class="lead">כל הערכים כאן הם תוצאה אוטומטית. בדוק אותם לפני שהתשובה יוצאת ללקוח.</p>
+  <p class="lead">כל הערכים כאן מחושבים אוטומטית. בדוק אותם לפני שהתשובה יוצאת ללקוח.</p>
+  <div class="banner" id="fromCust2" hidden></div>
   <div id="reviewBody"></div>
 </section>
 
@@ -194,15 +269,15 @@ tr.tot td{font-weight:700;border-bottom:none}
   <div class="inline-set noprint">
     <label>שם החותם<input data-k="engineer"></label>
   </div>
-  <label class="noprint" for="letter" style="margin-bottom:6px">נוסח המכתב</label>
   <div class="letterhead"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWgAAACBCAMAAADaB9AZAAAAwFBMVEX///////7+/////v7+/v/+/v7+/v3+/f39/v79/f79/f38/f38/Pz7+/z29vjw7vDk5uzg2t7O0dvGw8vBsbWkqbiYna2hjpOEiJh1f51uc4dybG2GXlxmZ29iYWJVX4FHUXA9RWIwQHS2KR22Jhu2JBqlKCFaMDQlNnAiKUYXL38ZL24WLHUUKnkXKmoUKHEUJW4VJWAXGScPKn0PKXMOJnkPJnAOJHYLJHYOI2UMG1UNDQ0ICAgGBgYEBAQCAgJTBtMeAAAnmklEQVR42u2dCWOayvf3uYn8EpFNWUSpoCZpUAFBEcX1/b+r/zlnQHFN0jZ92jyd3tslQaMfznznbDNy3NvjgeNEvdnUuH/jk4ei699ev+l1SeD/wfi8wSv6t+/fvzX1hswJ/3AcoeG4yi97sgcOOX9v6rqmKf/YXoL9K8Y9J9eR8/dvOpDWee6feJRGpSbd/SLUIoecn57IpHW9LvPiP775qNY0s2WosvBLDLre/P79GUEz0o3HX6hKfzlnTm3FntdqcI8/j5k4P708wSDx0Buaxv2Tjxx03R2NRp4p/TQQnjh/fwbQzzlps201/vkeOeiGOxoORy3l54EQ5xcyaFSPb3rT7jjNxj+d3oP2/bAlS2CTPy6o9/cPik7mDNb8/Az6AaS/OQ6Qrv8Tjxy0P5ylLfVndeNBJ31GzkD6GT2PpmN3Oo71m/zpP/t21gD0cDhc9FumaZnKj75aeBhxRt14eXl+QYNuKlrbAdCOJf8zaPC+tP5wOpwmI88b9Y0fBP3AKcyeX8CaX14YZ8CrWQ6MTvNjK21FMsxLw2KjVR4W/gcGUuU5xTz9Zn6J9vMe1S8YhjuaTqfDwB/7vmf+GOj7BwkDb3I2XtCkn57BnjlR4DQbQdumLAofUDOjNxiEcOP3I/RGYYj/hi96+I3990L4e9wF10bgzF4cx/nD4MthGMIfXjwYmJz0/57zXSvOAiAdBMFw+IOg7x/uNeAMigHKDL/BivgdlsAHVBSjAzrt2Lrw/lQeeJydbjdejjJ/nKUZjCTxR6MsRHSlAZbhj4PhLAj7Da7Gc1qr5bpwSTCbTmdJmg7nQZTFXbfdqPwJ8q25oQ8GnQRTcPJ+0KI54gza/IQexwvmOuriA35DUAzHth3bMj+U91DrdbMbj8bpfA7EFvDS/DSMl2CxWRbT7zjCkT8cAlTfBdAcJ6mq2mh1Yx8MJ5gvZjBL477ZUD+08Nx91koNhuBG8MLo1f0gaJ4SSS8EGcMVdKH3vrNiAmmwaeMDbjpKarXuxlG6WMzmwGyWjPpu+1h63a7nxTEs5MMUQFfzh0paN/OD2RzuThrFsOjg3f4THBeeV1sRScd06v8IaHCgKVD5TtYMnNGg9f23BU5tAmjbtg2Zf/eTCyC5XKOfoUnP5+k4i1sXfMS64faXmT/M+mTRfLValTjJ9NBo5ou5ny3b8FTV9/5UAYzC+ETnE0DD/MPxY6AfFOIMoFGkUaa/6xImPoqXX2+ieHTamvS/D70wqbWMxmmSzNJR3L/s5stGdznyx30NQe/d1SiYzRagKJln7C39PaBlw4Nl9ZOsusrJrXEOOvkB0JTgAFv+jub8zBxoXXl4KLt+dQtN2gE3i+c/8sqMUZiCQs9m42VfvrCgVYAikB5GYNFiKQCLhskCNCfJ+h+RZ5h7rWXX+CzQaDghAx38gEbf5wm756c8WAGFbioPR08DNt3uAGqnrX8wlOqHEYKeJ8sryKrSnemNIrBocS/vMEODZA6kxx8CXXnkzBFGEtXPAV0Bix7lFh2E1gdBP3AScsbcxgtF38i5fn9ylbgnrX0gciHQYwB9CxkqRTwC0Pwx6BncHj/ry9wHnEr8cZ8Neohu0sdB85xMnF+eKBp8+Y4OR/38OpFr2DiAtMh9HPQ8uG6bEmf2R7FRcliUVuYni9li8SHQFU4FxzD6M0HngTel65A0c6C5+0v617DJpq2GxH8M9HwG44YI8PVuCIFWeXFnoBP/A9KBAu2Fafa7QLc+Avqek1mCg6WRyOH4Vhce7i++EcPGWNxpvjvvTaAT4hzcAs21Ys+slkHHfgJuR/oBjb6v3ZkjWBB+F+joI6DvORETHBhys4GRin7/cPlqUdJtp4Ppae2dpBE0OmpvgX40e13jyKLjEYGGuPC9oCXmtGefCLqag55+1KLRnokzM+ecs3JJOPI3o9udDrh51jtt+p2gK5ygaer+uwx0OpvN32/RPHDuhn6QvGHRfFWiIb6RDOSrYn5hjTtaPAg0oE5KoPlafi3/JucX5j+/wVmAB6A73bGb73v7CHo8nU1vgeYvfEVpxSEq+7tBwyWN7iiYQzgJIU5VEqo4zoyhXJETbzwtf/TIamVvEAw0jT1ovlq2+cu6oX2jggoxfmIVFcrY3XBRKO1h2813OQMHi0av49ZD+FKUjTOUgX6vH33HPWr9kR/A+59F/VsxuNRgeXJNvZ0sUTQDqyimaTRKM+9ObfnMorFEu39heDFca2gXDSfnDIEKuhyE+i3OzBkkJ6/zLtIF6CS55j+ATMj8hTVnGWI4+U7Qd6A1/WUUAIDFNBi19jUH+dhI74x2t8+y4f1uy5C5S410aMya5bp9yp+HXrdt1nN8EEy4PmGGXxmCRgtumG6/j2nzUd811TOrvuce9G9UuKIKIYoHOXYPb2ZtKMHkOO8hTV4HgU4vgxarRrfXUo+/UQIdvAN0ldPcfjz20wUa2nS2GHkxVRjirlYK6zGpEsdhiCbp+1EWxl3zvIcTtF7W2l4cx1ihgCvhwhAvFCu0dvSHBWjwOioiJzfApcxSnEtwbRh7xgkWsGdMjNICSE7081UH+iJpp9N5R3WSgZ4T6OUl6YBYZbBsq8dWAKDby1ECpN9l0VXOALJ+ECTDZMESazD8cRgewnrUcDdE/stlFkXjYTANxmHsatxZTNBoe8vYC5ejvhdloEb+eBTHLRCQGq+abu5zwB0dt+DV12EmLZkjMpsOE38Ue22l/G5yzkiaJfqfnt/HOU+aguvh2PqbNn2QDnTUzi+v8KDGXks+nsGk0aMEwsn5e0DX4GbFSwCYpukMISyL4Rk5aJFTjH7m+1ncd2H0wywA0/dHy5MK6yOYsxdnMBn6LdMwLBeMFQKnaZB1DYnjTDToPNeB0sFp/Rie1ccpEgTwLv1kOIpbUmm9eXioU+HqmUoqz0+4Dn6vyw//3Uql80Uwrllo0kBaepdGLxZJihZ9jkzkG24ctk++gUkycO/eCxqTfYQP3vNiAX6X2yrqC2pxhdoKY+SKxRpFbZj9bDacDSHCP6r8wQoEQjAawVfrCqt49LMR1q2GQF4zWi6ISRAMA7Be8DoeDbwY7rE3isOlH2RBkgzhFWuH+uZDkbB7ecm1g2Wg/7v8VhQdllS9XsxDQdAtB5Omti6Ib4PGWHoOoL1zZBKmUWP37Bu1AvQ706QyDMldgkxDIOGZj1KtBt7d4+PeXWzHI1DQQ+OL6o5BZYbTMfgoVbFSSJbUCsNoFLvkaUioKlp3mZJShH0sCPW9zB8CT/hC5rb6sbeEr2v1utHqwiP9ZDFMo2VbKVLJD5xyxJkEGoTginAoTQcL4e1Dxhgr4zbZNCe+w6KvgK5ikLH0Mlc51mgeQeNiOJ+nH8h1tJcRrEppfJQ1YW+gvcyGaYgVnirP84/w0xQ3C8CkF/6yu39bgmSCEkTEmXznO7jQjGE1Bzv2w1EXi29ua5gmCVh1Mgxhbe0a+c2DuRD7yXQ2TDKvqDzcE+fvlENi2SS052sCzXO6w0a7aHbkwaZtgm/Xb4aIJdAZgBYlUazREMUqvrsGWOE4c9VT0FIOOnkn6AoMAA0ReDrG9FStcPuYcLTiLKMfI+699kfQ7PlssYDX1c6XCJEz4thP/X7jMPVBdFzgNwStGNGEqKsQ6GPLwXSxGMd9s55XbZnvn2BVaLy0juyZur5eipLKt7p0dSGsWw76zh3HKm4VL8iY9ugA/JukC40m0H3pvF6YRUmQtS+BJulIPmbRWZRmKcqucJTf1TAHEsHKKB15kPF4niTZOPaoWgm23sBSMghM6ToMUpchhAEQoPQ1kiLBzWAhhVU3wMV2H2CCj93NEuA/BVHJl31K2OF4oQ67F1YjvNFdpzbJooF0odPAwsS0h4Nfkt62aCyCh8cV8Da4+Vk0nw0RdO1cOtDrSJIPgQ4z8DyiY9ACBBmgKSAIR336sDr0ozQNFvNoSV4PBDStkRfgnRWOl8flKA3QcXPr4OHVqjKIDoBeDDEElaqlZ2x5Y/DyZsEof82Szgoqz7k+s/aCb7p4LVYRiTRAtR2rNP2a6OMRaeFt6ZjNhukYgoQsjGB2w8iybAnubDBNs9YJaHCz9qDTj4AeAej5iUVLEnjZ8LPi4xIflXWybDFfpMwdekTDH8792Dpdrr3RGCU6bimVeyQPoDGrkI7MowWqBrduPMXJG+WrUT0PCF9ygybgT+jdXVsNBWbTFHkL+3stmpie7iB8/s1cByYWfQ/blMDtRM+TBgRUszQ8BQ2K+SOgwfSydJGgRgglz1glg156J53HAueG4zlMtXG2pCparZUNKfVVKSf2ao8wIbAnGg26yu1BJ+O8QaJc3/H84WyOgRB7zawliTSDfn8m8wab1rj766QtNOhO2zYLrDwvmzZLMKnXbLoIwQl0msUUV9CIIvgNLCWBYKB1Jh2cFYbph0GDrsMKmpZBwyKp9aPID5euxKPHsR8S16bmngW8qjbPw6oHjii8mFNf8xGkJ1zGfViMHpmWwOo4DRLylx+PQCveGNajYJzFjBE2QRdF7yLhzxZE/UY4WEfXGRw62yhIC5wM6gEm3THVK17eATRMtcg9Ht3+CNbC4SWNRtAft2jwVAD0kUVX0FADiJeyVu3s+jBK5rN5Gsdd+pHLYQovpiWdxUOq0YJAhz0pgQ6wMRBBV4+Tu30/mC+CYA9aKdrNn/ekyZ8GmxZvksbIG0jz+wQC2jniN68UAkqg/bCvyifDcEfpcHoGGobJQKcf0uh4nCQw+csaDe++m00TvGGHVTgfXgYRO4COoj6EJjVQ6GwYeNqZzdRYf1vhBTDQU3hG7TRR14eIBZb9OAfNs3psvh7mIp1vpKiL//HXSXcoQwpRinTS7eFcSTCVQWM++twK+ym4d/ULFj0OsJHsYxbtJ8EMI8MyaMMDdzlJ/Qh7gGHExQghxoNFIvCpbs41QInTWbmP5yhxWq1yx6BnGJeceKX9cTqHcLaw6CJg+Z6r88GusaHj4X/3t0k72ETDYkz4vQGKguphXOTBFsOESlkxLDNCLpAYYPAojOgwx9dBoyWq7wadjdCio2PQ1miO5pdk8fHAhYKtF0v0SDhMzAbZ6QpXJLz5kr/nZj5WMvDSC6DnJdAFabbJjfy7nDll/t9QD8cptSsJHG69ANa2fon0AfTlvg4sqNJ6fmpF5miMD5p/yKIzsOggGB+DbkWgD8Fw7LmXRq4iEHODswd3I+s2bld296ATBM2fg8bv7EFjUukbCw6f8gbS52LDW7N+9X2JbEUEWQbSRTAuaRa62I6tyfz9R0E/8oq7fAO0+nOgYaIPpwtMdMgK/nc0isUCXmgXfJCUQNfeBs0Ww5MNtLlFI+jDOxVZ+u6pAM18aUZaEa/509gXRikOp60V9Uueox4E/NJ5vbMsHRdjPIkzvTPpgMt+FWiu6sZDqgUYt/FJfQgqIX7vvw80Sod3AfSYgT685ntezLciE+TvT/t1EYNx8bpNN1iKw7EaQq7TYH5o5p2Odd7tcWzRF+oEImf0ltdBw2LofUijsXBSAg1YuvFwhvnkVo1/5K8Oru5l8zRN3g16cQV0egIajUlhpaznojr7wpKm1LJ7nbRO4aDdKcWDqoELInzpbCvzsUVfBK31Jm31mnR8GPTJYniH3h1tWIvBP67cKjt6WbBIIazUbid+C41ezC9JR3QJNIvFWWsj44wFreenkyb00xVRMmmPlt0pDlxCc2jSJhe7eZr2KEBPr7Yb8IplaVKVu2zR7/E6eP6uZNEnXgdYdIbFp0NG7TpooLcYx290PZdAe/UzrwNBz9MT0PcP/2m03401dbwUGVPSafFqclrCXBL8au7LCGiWbYzFD2vkZdBX+qPvTov+dwKBnlNk+JZFV49C8FP3jpNc6hwfhje9F+z3jeaLZBHg/g/+LdAJBlOXQI8JdBgfP8f9/yRm0yzdkUfiKCM3yi2ygeXCo/wGeB56m1p6DZXnroP2Lr6FUkpy31OFS+R4xiJD761t6Ioi7dOkKaA6zt5V3DCgmrWnVW+BBo3GwCoIu9c7BPkc9DLB3u3LoOcXQBctYU+sjfT5uYgVX5h6XJjnPLU52p2j3CiPxVqMZM635rPIMAFvaO5fAX1pqwbmJgl08jZotdUylD3oxSI5CcHbIXZiBOMbPYn8Y41TPPJOpijSl7W8srdoAA3OxQdA5027359f9sEh2wZOhYAL6iGSGlO+45gzVmAQPs99HHQpWjbz+DK36PnboMW8L4RnadILoFshdggkfta9okF3LPDqhj5Wa+dh+9rLq+MTEOgUtGP+EdCHNsdcNoqUKTYfXCLNyrQd25RKMamIS+Eln2MPGqRjMX4DNOhyn/Ypl6QjfQt0FXv8i2LsZdCmh7svE5Lui6Ug/j/T0MDyYx/bCgI06epFcXFRvgvQ4Al+BPTepp/y7PRLXnahDZ2nvoegmKzQ0iwX1UC1bUzr6TJ/LakEFr14w6KrnOLGS1chj4mBRu/uDdCSbHqjoo+ihe0G81PQKi4SQZqMM7d+yUWWHg2vD1ZsxT56J8MsbsvnOxoqnNIewJyoEugovQ56trgIutha8ZTrRtFQQ1tnT0ou2PFP+edy1x0v62yvp3mp3ZeBxq7dRXATdJUDZKFnsuwN02hM3s1ueh3YrjAK3cYBNDwmPgYtu5g9XSR+FJpV8e5cERpu7LVx6+mI/MA07psXXOm7Vn+wt2hYdNPxJT8aM5WL5CLoPMGUF2qfCrvOSZdtGvewnGmERKrNiok8d92ip7NgeQM0L8pGPx4VyBC0v8BGMrg910FTid8LWwrrgCHQ6THoO9pSmlI9nfq/+HNvbRlSegjcE6xujyPMvZyt0PDyPEPMQY/T2fxiriOcXweN6pFvy3p6Ljl5rOnxYU8ac3fUdGDr5QNLFROTpM6ZB70H3Q1x5/R07t/s+McOj1HcZsrBQM9nQQJz/nrAUuNqLc87aC+CTsHSDn0d9NSNfpzCTUuzEElzZSePGmliUCz8EUY4SqfTxTjKUGS4/XukPnODJRnzxXB8LXsHoKcLf3QZ9H5DJ0WJeYI6dz0OpHmszzJnWTiKE23WGyZd20JIoIPg1taKR5y4yxjnbG3v3kUJjuC6RtOW8QiL/nfiAXSGoAWh8EmqtHsgongtWy67JtyTfFfFY97BE2NjB1gqIB9hKSalbTBwnSTWqlURb6LS8kJ8dZV8CvgspdA4dgQJ9PQG6P3ZM895ixgTkCdGOvc9BOCMhSzHPFJtjRp4bUO+ulcTpANNeja8ClrkZK2/zLJ9O3OFIkPsu8E477JF17BZ2Uunw8itVyo56DFQwhY7dr8qIrsfWp4BzdIo67fUO+pBkFiSxl0u42VLIlM1vDDLknRB+2AsdV8PUo12mI1iV0WLwDQVWvQ0OK0Z0mKYW/S1WcgON8g9j6ei6JIXt3KdNhwqWoFjJ5QqATYVbK+VDPN9hsmMQHsX7gaPjSuy2cfOsLitMml8xMKLjy0SsyF4W/yRYLJsWxX3rGQpuGOjVrF0gRiD4QY+IqlRyKmBXy5VFcuLsYUJ4uY0Ct1iV4WqmW1vGWZLl4JcXsCNM1kKopAGoDNu29Aa9XpDM1vh0veXfZabPICOLoDGhX/hh/H1dYUlTfMGBLLp5yd2ysG3+j13D0GJTY1JVl3cv23qQeiwxo4r7QYiD6D9hLo6Qtwby1cr1XwIfC6DjZYXj2Fqj4pFjK+oYJ0BeCrJGCO6S0NrYe8cneZQbNbRwigF5zsJseEazdboDswads672Du9AFmYgwKHXbdlmWbLdb04g6Wvr0m1PGMD6yI8aZpB4BdEmdelZuB4mY2H8JyV6n+3QXOcF9JWsiyuXz+ZgGya3A5WAnhm2y1eSKepNIjp/XLKmedl1r9kXW8pFWGJQdAQsSQ+mM6pd3UnSUBslA3nC9y2lldAJZTOKAHrBNJx36iV3d+7qiRrRqsfYgfcFKiq+9ilH2ezBQQnmddqyLLW6g162Ilew+MTQDjw1zzAzRLYvzPKssj3I/AlindUkyBkivCGLOa0UyJkZ+SEYz/DTtRK7nv14/ECNDo9auZjTWZhApzTcGlebd76j53hSMH4E7NplkF9oTIi+XCgEWXOIp1qBQJtXvO+qhL1vaV4XsdsOoTpaNZVGgr7owF2BXTGfoD+b1cGb4wXYPlRWwN4xwnOhAD81VYLYjf4BQMskbqUwyxCs5omcZffNxZg8918OEWb7ne7YIpxizLdIL8uq8Om4MpQh9QU28lTINg/SouChkX+HJYGvAAvCYbjDPR5lOf0eIl1FMNcGvroJEm5iVXgVUttPAtqnvojDLyubeO+5/+jvRZPLDv9XLQ/PlPBVqfTq5zj7niNSli2KV6PKEACcM89MYPoNhv1jzto4jiLIz8Yj4EnOFlFnrwFjKKARZQJzvYwP1kM2wWYmY1hgPsXLdvFLKlUDQ97UGFWY1dWHC7j4vggPAuJ9q6kWDydUvYIz1TLjs/2qJC7HI5nwTgdk89DF8XL/mERknA3RTZO4Q7QnpCD4yHBY+EnjNNoFHs3jgnE4tY35nsUyWnWYoPp6W82BSVKmXPDYg2m6pVtmpLaMMBJHflJMsYtHthoN8TZyLoqcEQRHhKGIxqHIVX11IZmuIApmkOQBU4hGBVM8HBEh4uNoyjCc8VwU1UEj45GYbw/fQIWVQv7m4fDOXaNx0sskTEtqvBcHRY+JD3GBsUpmqqfLXGz0FGwiDodw2SBH5Vi/TGg47ZcrfCXVMPqLbFVgY6Kg4jSoDkOb9YwWx5YBypNBJ65176xkTHfF86q4kVhiw4Me/2WZ+fKuaxmXvy+eBpeBcyy64JzPMrIMWXtdmNkNo7oQDbijA14+D925bHsWrvbA0TFGWLFwLcWxrk1Y//efj9QX92HZ7iZC67wwRzHYM5eq1Qhw52o3RE2cqQ+yMKQlqyupZxkPyroM8MiiU+TzOH+Z7HXxf7z3G6tbm/gxXDbYXr14X+v18ZJA26u2/NimnUwYviv121dt2nuXs9tmqkGqQh5Ht9Y5H143aJkkHB0zP8uHoaHe/8G8GJoFH/eGN1ut4Xe32On1+3BP7rsa/lw4T+3e2G4yKqcSDRd0O8YNdpq3JUpitwjeM248TLGVXDYZ5svL6VNFQNXAQ+3aPbdtqk+Hg7WbZydTGlQmMxLJ1+FxeTGZ6vkpNGtKwq2e84Q/B1qVxxbCGGYV3NrFd14Y2gw9n/RGkjsjqtrl0eDRr0YarGonrY4NWAOg/dm1DnuNEBGgYXvtl23jaurwl08IY8ehPuYrVax6fjXn214/z86NpN10xzicBQO3L75UFoI2yQc1rt2Jv7GUdpQfp7qzJ1HRWErVbXyZhny9B989XTwb37nik0j6ae80pJvW2bCUZqiAld0J906Kl18/8DtQ/nbhhcsCGxDUa1aqwmHF157fCy9CxqP53EBS05cOdChUhMl1nwriTcbv0RRkgRBgqs+6+MN2EkpdFIY1bdyznb7KPiTGGdHl/g/8cDn23AqPF/9A17kA+g0a1PHtPT3XKDbWmnJEWWDCXRTEf6d/f8TNi3V6ZRSVjlk9mzIj3sxogZShwn0v/Pof8qo5eIDQnLOR1lQtp0F4/G/iDPP/4kaxxcntBUGfeyrKk06wKqj/TWciy03f55J32MZEfNJuBJ2yptjeUFusk1vpszzfwtnUVGVP/Rz7DCV98IMer+RgkUqJvb8dzpNhftrOCumM+hZ9Z97ms+5TeyYCSYdRqkWS7uDUDgs5W/5sCGeV5qTzXa9chp/4BS8f7jPP2rvm17yoEWqqWDRW/trPtRJ4rTeer1erScW9zMfj6TJnzXfyKRfm/XyFnRaCJ1O26yI/F8DWp+sVuvNam3/uNoJvOGYn2NbKB5NXS9/vi940NSE7ji3cv1/JGiw6NWq88MvWuTqzqTJfdbnhSmUfSm3KmkdVoxV/qJIReT0wQo4/4R04GF/KwD9SWr5cLLYCqymQgdI/0WRN8+pDlj0bt370QALgh1j8LMSf9udLh92wLbd09bNvyvDwXMNezCZOD/8EQsgHL3NZ4I+eb1yk51C0/zNnG5+nBEvnNx1/uLHH+lN/cwfFUTx4lPz+I3jI2x669XmEzX66KeLxb5NS/38tATiI2A8HfdWbqoU9oMvhE0ovUrWjFqWNgG5kWEKF+IP6RTe/nw5oTg9ChbC1XazmVh49Jbw+fNPb7Oid+P3LYTs2Ft21N+V3S9yQzuO+MR6Q33P3eSwaNZQTp4Z/w5PqZeftNFbbba79cr6HW+ZFkL0oG2N+2QPWpLVRkPTNB3PE5ZMu+f0bNwNlGeGdL2oRaq0Z7fX6+VNFwImDjoOXN9p63L+ADAQ02yysQ+y8DvwxK+vvZ7dPMGsWU7vddBz2M+EYfZW691us9708OMB9c/mrFi0NbljcMLnchaag0FvgGNiq7ozWW3Wu9XEMchzxyP4Xul7g8mrycn2YL3ZbAZN/B6mbwcQmsCjV5OBk+8q4zn7dcLGoFjNQA30zmSzfu1NdnBlvcRZ7UzwaxjfDDBaEDgI39fr7Q7GBlzxta1+ZkiMTRF4Tsdv8KB5vm4Ptlswos160B7stvA2VwjTZFUzpdmZwBuHmHpiyPaEGRs6brhkwRRfATfNWQNFtv8Dbo0FLgMFLDloHk/4hX+DGwJ/rre94vwAQdJ6oMaOplr4xNtBUxLgPg1Wuw2CXuEdtlVe+MQ3T/uBsKL1+bl+PFAP7HK1Atqrdc+2e2hK682g2HAnOxh9rHYT3cLrgOlmgDsygPNqtXnF5hN9sl3RrWFmqg82yHnSzkFzJn7fQcGxVpP8b5QUeV2v1gOIhRUHHrFev2ocX9d0Z7tBe3Z0ELTPBQCgKQVt/45cvwgBxhYMGcxo49RluUEauUYctFTxFtwE+PfEft2tNmSqkwYnKO0VzPBVG6RNkB0w+c1Az/cs1m2YAkCuTc2fYOMDmDHgrUmEFp7AwlZkgUcvbrW2wLK5zoqi9jaeSajYa3gp23wx5D/XyiqmZbXb5m+JCHkOpj6Q3O56JJ/GBOO6zapJ7xLm/WS9hfcN5juwX9FWUTqAHoXZBjKT25gWXfUUJh6KvdniI2yyaEGAQHG7BcMVMYWxAaITFZc90V6jImm8KPL2Cv++Bh2SRMUBfdlsALQsil+pGC3yHXiPG1Rh+LsgyKCx8D53jsxAw/K0W6ORAV+MrsHDlWGyw1wHKacNanwTOa0mhUMGxr7ZbhhoXN5QdF9lKhc5OCtWNjbFa5M1KDQ8KbjSMGtQsBzqgrM3uBqufktk+DtzSCLXAYw79p6xDgWWBha6m2h7i0YfYDPBw8pU8Mawh04ns9/18GYInDaAf6zYv3LQuxw0GugKF1Bce0TUCFx28TrQeFQoFf2qBj4BiA31U8DP3/0u0L833eaABcFk7bFapdBc4WK0WzUL0Ct835teg0eXXqX4xNrispiD5rUBaTypNE+gtwRawO75Hs6WXY+oczbY7W49Ae1pTLZrBhofo71C0O2wjuQ2+TaTLwmaTDYHDdaKoLdr+8iiVzburOJZbC33dghsnVs0GCQuoMBGOAGNDwfr3mwcFh3Z6LisJybcKjBtEJgOwQX1NpqaWjx882VBY4SQgyZsFDE4ZdBbeOMSSyLhejfZwQK33jo56Fe06DWizaWjAI1ANzsUIogLX19fJxuS8zbHORvEucnLMEKRENmDXn1Viz4CjRHDtleSjs12cjisADw2AA1mujuABuPcrh2Jshqk0et1h7kgW7xt292kPOBbAzaNcrkgxrkf3sZcx5fU6M6ZRaNIbl8PFg0aPjEOJ1lzOq5pKAgH0CDEG/AahAL0BkFDnA5eMXKbNA+N2tgGLdI8We9BlxwAmhDbrwy6UYBms/r1WDrKoDUS2PXuWDp2ucpbe+lA0CgdO3LvjnIsE1g9YQV+PT+b1PqyiyFEcttz0Lu9dGzOQDdAOsge96DRM2GSTaSYeyehdJCzBgGLJEv7IYJF7/D2ric6L54k1DAU3X5JjT4BXb8M2iyBVifrY9CUiSpClD1ojLQh/MgfftiNKULUPcB1YbuFsPv05HR8+OaLgt4cS8eaQDvXQcuD7Qlo0PGcjXiQDgxRmitaagGoWKq2YOiCEc96O1DK5Zz84V8X9MGiRQrTQILXVgn0tiwdQMSGCAYokR8NQQkGLHQvBHyEdYgMRV4f0MPXvf2nrcBa2hDoBqCwr63jcFgq7hOC5nn+a4FeM9CU++Wb6GaUQ/Az0OR2bIHToAx6zbJKBWhy77D5YEdLKzYuiQKPVUmj1+TIFcev7yb44SqCAGoimqaUP3zzRRdDNCFw73gMRiT0ztYrBjFPKp2ARh1HV3k3YeEGxJIsL1oyyfXaYf+ySTsgSim2EWuDAd5DFG9SnF7enSVYE1vm2cNROgRZElT56+xyIOkAUIhSAlWVqUKy3dj8NfcO03AQ8K3RGnFyyxbEe6t1T80T+lae0c5dwQHln+CXo6kyrzYHmzZWaJTBerVF0JuBpdXVuuZQRQHvLBZ8MCHOmY7OSV8INL2xHSaF8GQCjPpWVO7g9qDX20n58Apw2xzMWlCYzcsOLISUm+ZKoNGiKT9toYuC1bDdxLGd3mr7igey8ALmT0HqN+vtetBzsKDYJCHCUBQun3SM5sSROeErgcZwGjPSTRDQAaaDV6umyA5mkDHhtiIv4OhB2itctO3hB+Q1sX0UHisUoCcHi8aTZjo7ytmtt/A0Oype0Q2AWbHGtAYWbTADMiFtAVXHjBWWtiaroxX4K4DebjDonWxWk8EEndvVqk3CwQuqRXmg1QpWp7pULheA5W9WK0eTmwO0P6touylA5xaN5DrY9YgZf/wD5g2rLvIiPDdab14gs4tCOswh1o8KT/plhCNfDFGGB5azolULtJcdOovWVUoFDeyjlUl1QGTWE1DU7ap3OK2lDDpfOhVrQJ4E+hhOOeZuvk7QIcGv9wy+OHmIs6gSvhq0v5rXsdpst1hhUZsOVroHh6PJZLPJzg9oGkazqZcPagGT1x26DwM8kqj4oKkzi2bHWlnOAK7s4akBpWMfcctZb4BfN5T9zh12udM7POkXWgyxzo2F/7pmGLomv/cdSnVN1zU8k0TYhxzkEIK7eADN7F/LO7/4o5/NyXXqKjjbHaTI3BcbItdebdGPHjQEaT/99yjL42Rh4kv+XhkPgMbI0Cn/kOIC6aQZdf8Tj+5svpP/64HGtRAtGk8YkKT3d/vxIl1faGvdWQ3AdTAn221RnD1E7eLlZ+bxZIPzr/Nfb9u7mGfaCfRPPZOAiaKBCR4i+IebVfurxdC/0qJ/4nkwBkRP0Ja1V/AQt7+pk/z/P4sWOBMd6rUjaz3wYnav2r/DGI49BwK9RdC89FMWrWKwCBGk5mDvryP843zEh6eABQIxmOtXz0N832hTw5ii90BBeo1/Bn0yGr0tddute9pPPpPirDabSae32q4dneP/gS7bs4rx7g79se1u4Bg/1/muWoga4ul/p+WcrWB1Z3AYk1sfOv6eZ+MU3bKaDYXnfr9C/x+eJLPT3OnDwQAAAABJRU5ErkJggg==" alt="ELtech project" width="179" height="64"><div><strong dir="ltr">Eltech - Eliran Krispin</strong><br>משרד: <span dir="ltr">052-4341604</span> | הנדסה: <span dir="ltr">050-7878486</span><br><span dir="ltr">Eltechproj@gmail.com</span></div></div>
-  <textarea id="letter" class="letter"></textarea>
-  <h3>סקיצה חד-קווית מצורפת</h3>
+  <textarea id="letter" class="letter" aria-label="נוסח המכתב"></textarea>
+  <h3>סכמה חד-קווית מצורפת</h3>
   <div class="scroll" id="replySld"></div>
   <div class="noprint">
-    <label class="check"><input type="checkbox" id="approve">בדקתי את החישובים ואת הסקיצה ומאשר שליחה ללקוח</label>
+    <label class="check"><input type="checkbox" id="approve">בדקתי את החישובים ואת הסכמה ומאשר שליחה ללקוח</label>
     <div class="btns">
       <a class="btn primary" id="mailBtn" aria-disabled="true" target="_blank" rel="noopener">פתח במייל</a>
+      <a class="btn wa" id="waBtn" aria-disabled="true" target="_blank" rel="noopener">שלח בוואטסאפ</a>
       <button type="button" id="copyBtn" disabled>העתק את המכתב</button>
       <button type="button" id="printBtn" disabled>הדפס או שמור כ-PDF</button>
       <button type="button" id="regen">צור את המכתב מחדש</button>
@@ -212,266 +287,493 @@ tr.tot td{font-weight:700;border-bottom:none}
 </section>
 
 <p class="foot noprint"><strong dir="ltr">Eltech - Eliran Krispin</strong><br>משרד: <a href="tel:0524341604" dir="ltr">052-4341604</a> | הנדסה: <a href="tel:0507878486" dir="ltr">050-7878486</a> | <a href="mailto:Eltechproj@gmail.com" dir="ltr">Eltechproj@gmail.com</a></p>
-<p class="foot noprint">אב-טיפוס: החישובים מקורבים (כבלי נחושת PVC בשיטת התקנה C, בלי ריאקטנס), והמחירון הוא לדוגמה בלבד. התכנון הסופי טעון בדיקה ואישור של מהנדס חשמל לפי התקנות והתקנים החלים.</p>
+<p class="foot noprint">הסקיצה מחושבת לפי IEC 60364-5-52 (כבלי נחושת XLPE), בדיקת ניתוק אוטומטי במערכת TN ובחירת ציוד לפי IEC 61439. זו סקיצה ראשונית בלבד: התכנון לביצוע טעון בדיקה וחתימה של מהנדס חשמל לפי חוק החשמל ותקנותיו.</p>
 </main>
 
 <script>
-// ---------- data ----------
+// ================= constants =================
 const TYPES={
-  motor:{label:"מנוע, התנעה ישירה",pf:.85,eff:.9},
-  vfd:{label:"מנוע עם ממיר תדר",pf:.95,eff:.88},
-  light:{label:"תאורה",pf:.95,eff:1},
-  socket:{label:"שקעים",pf:.9,eff:1},
-  heat:{label:"חימום / תנור",pf:1,eff:1},
-  hvac:{label:"מיזוג אוויר",pf:.85,eff:1}
+  motor:{label:"מנוע",pf:.85},
+  vfd:{label:"מנוע עם ממיר תדר",pf:.95},
+  light:{label:"תאורה",pf:.95},
+  socket:{label:"שקעים",pf:.95},
+  heat:{label:"חימום / תנור",pf:1},
+  hvac:{label:"מיזוג אוויר",pf:.85},
+  feeder:{label:"הזנה ללוח משנה",pf:.9}
 };
-const STD=[6,10,16,20,25,32,40,50,63,80,100,125,160,200,250,320,400,500,630,800,1000,1250];
-const CAB=[1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240];
-const IZ3=[17.5,24,32,41,57,76,96,119,144,184,223,259,299,341,403];
-const IZ2=[19.5,27,36,46,63,85,112,138,168,213,258,299,344,392,461];
-const BUS=[63,100,160,250,400,630,800,1000,1250];
-const RHO=0.0225, VAT=0.18;
+const SIZES=[1.5,2.5,4,6,10,16,25,35,50,70,95,120,150,185,240];
+// Cu XLPE (N2XY), IEC 60364-5-52, 30°C air / 20°C ground. t3 = 3 loaded conductors, t2 = 2 loaded
+const METHODS={
+  E:{label:"סולם / מגש (E)",t3:[23,32,42,54,75,100,127,158,192,246,298,346,399,456,538],t2:[26,36,49,63,86,115,149,185,225,289,352,410,473,542,641]},
+  B:{label:"צנרת על קיר (B2)",t3:[20,28,37,48,66,88,117,144,175,222,269,312,355,417,490],t2:[22,30,40,51,69,91,119,146,177,225,270,313,358,415,492]},
+  D:{label:"קבור בצנרת (D1)",t3:[21,28,36,44,58,75,96,115,135,167,197,223,251,281,324],t2:[25,33,41,52,67,86,112,134,161,200,239,273,310,352,411]}
+};
+const STD=[6,10,13,16,20,25,32,40,50,63,80,100,125,160,200,250,315,400,500,630,800,1000,1250];
+const CONN=[25,40,63,80,100,125,160,200,250,315,400,500,630,800,1000];
+const FRAMES=[100,160,250,400,630,800,1000,1250];
+const BUS=[63,100,160,250,400,630,800,1000,1250,1600];
+const RCDS=[25,40,63,80,100];
+const CONT=[9,12,18,25,32,40,50,65,80,95,115,150,185,225,265,330,400];
+const MPCB=[[0.63,1],[1,1.6],[1.6,2.5],[2.5,4],[4,6.3],[6,10],[9,14],[13,18],[17,23],[20,25],[24,32],[30,40],[37,50],[48,65],[55,80],[70,90],[80,100]];
+const CTS=[100,150,200,250,300,400,500,600,800,1000,1250];
+const MOTOR=[[0.37,1.1],[0.55,1.5],[0.75,1.9],[1.1,2.7],[1.5,3.6],[2.2,4.9],[3,6.5],[4,8.5],[5.5,11.5],[7.5,15.5],[11,22],[15,29],[18.5,35],[22,41],[30,55],[37,67],[45,80],[55,99],[75,135],[90,160],[110,195],[132,230],[160,280],[200,350],[250,430]];
+const RHO=0.0225, XL=0.08e-3, VAT=0.18, U0=230, UN=400;
+const LOGO=()=>document.querySelector(".logo").src;
 
 const EXAMPLES={
   lab:{
     customer:{name:"ישראל ישראלי",company:"בניין מעבדות מחקר, קמפוס אוניברסיטאי",email:"projects@example.ac.il",phone:"08-0000000",site:"באר שבע",notes:"לוח קומתי לבניין מעבדות חדש, כולל מנדפים וציוד מחקר"},
-    supply:{ka:10,div:.75,vd:4},
+    project:{panel:"לוח קומתי ק-1",rev:"0"},
+    supply:{conn:0,ka:16,earthing:"TN-C-S",feedLen:40,feedMethod:"D"},
     loads:[
-      {name:"צ׳ילר מיזוג מרכזי",type:"vfd",kw:30,ph:3,len:60},
-      {name:"מפוחי מנדפים",type:"vfd",kw:7.5,ph:3,len:35},
-      {name:"משאבות סחרור",type:"motor",kw:4,ph:3,len:25},
-      {name:"תאורת מעבדות",type:"light",kw:4.2,ph:1,len:40},
-      {name:"תאורת מסדרונות",type:"light",kw:2.4,ph:1,len:55},
-      {name:"שקעי מעבדה א׳",type:"socket",kw:3.6,ph:1,len:30},
-      {name:"שקעי מעבדה ב׳",type:"socket",kw:3.6,ph:1,len:35},
-      {name:"שקעי כוח לציוד מחקר",type:"socket",kw:10,ph:3,len:30},
-      {name:"מזגן חדר שרתים",type:"hvac",kw:5,ph:1,len:20}
+      {name:"צ׳ילר מיזוג מרכזי",type:"vfd",kw:30,ph:3,len:60,method:"E"},
+      {name:"מפוחי מנדפים",type:"vfd",kw:7.5,ph:3,len:35,method:"E"},
+      {name:"משאבות סחרור",type:"motor",kw:4,ph:3,len:25,method:"E"},
+      {name:"תאורת מעבדות",type:"light",kw:4.2,ph:1,len:40,method:"B"},
+      {name:"תאורת מסדרונות",type:"light",kw:2,ph:1,len:55,method:"B"},
+      {name:"שקעי מעבדה",type:"socket",kw:7,ph:1,len:30,method:"B"},
+      {name:"שקעי כוח לציוד מחקר",type:"socket",kw:10,ph:3,len:30,method:"E"},
+      {name:"מזגן חדר שרתים",type:"hvac",kw:5,ph:1,len:20,method:"B"}
     ]
   },
   factory:{
-  customer:{name:"יוסי לוי",company:"מסגריית הנגב בע״מ",email:"yossi@example.co.il",phone:"050-0000000",site:"אופקים, אזור התעשייה",notes:"לוח ראשי לאולם ייצור חדש"},
-  supply:{ka:10,div:.8,vd:4},
-  loads:[
-    {name:"מדחס אוויר",type:"vfd",kw:11,ph:3,len:25},
-    {name:"מחרטה",type:"motor",kw:5.5,ph:3,len:30},
-    {name:"מסור סרט",type:"motor",kw:2.2,ph:3,len:18},
-    {name:"מפוח יניקה",type:"motor",kw:4,ph:3,len:40},
-    {name:"תאורת אולם",type:"light",kw:2.4,ph:1,len:45},
-    {name:"שקעים קיר מזרחי",type:"socket",kw:3.6,ph:1,len:30},
-    {name:"שקעי כוח תלת-פאזיים",type:"socket",kw:12,ph:3,len:20},
-    {name:"מזגן משרד",type:"hvac",kw:3.5,ph:1,len:22}
-  ]
-},
+    customer:{name:"יוסי לוי",company:"מסגריית הנגב בע״מ",email:"yossi@example.co.il",phone:"050-0000000",site:"אזור התעשייה",notes:"לוח ראשי לאולם ייצור חדש"},
+    project:{panel:"לוח ראשי אולם ייצור",rev:"0"},
+    supply:{conn:0,ka:10,earthing:"TN-C-S",feedLen:25,feedMethod:"D"},
+    loads:[
+      {name:"מדחס אוויר",type:"vfd",kw:11,ph:3,len:25,method:"E"},
+      {name:"מחרטה",type:"motor",kw:5.5,ph:3,len:30,method:"E"},
+      {name:"מסור סרט",type:"motor",kw:2.2,ph:3,len:18,method:"E"},
+      {name:"מפוח יניקה",type:"motor",kw:4,ph:3,len:40,method:"E"},
+      {name:"עגורן גשר",type:"motor",kw:11,ph:3,len:35,method:"E"},
+      {name:"תאורת אולם",type:"light",kw:2.4,ph:1,len:45,method:"E"},
+      {name:"שקעים קיר מזרחי",type:"socket",kw:3.5,ph:1,len:30,method:"B"},
+      {name:"שקעי כוח תלת-פאזיים",type:"socket",kw:12,ph:3,len:20,method:"E"},
+      {name:"מזגן משרד",type:"hvac",kw:3.5,ph:1,len:22,method:"B"}
+    ]
+  },
   office:{
     customer:{name:"דנה כהן",company:"משרדי חברת הייטק",email:"office@example.co.il",phone:"054-0000000",site:"באר שבע",notes:"לוח קומתי למשרדים, כולל חדר תקשורת"},
-    supply:{ka:6,div:.7,vd:4},
+    project:{panel:"לוח קומה 3",rev:"0"},
+    supply:{conn:0,ka:10,earthing:"TN-C-S",feedLen:30,feedMethod:"E"},
     loads:[
-      {name:"מיזוג VRF",type:"hvac",kw:22,ph:3,len:30},
-      {name:"תאורת אופן ספייס",type:"light",kw:2.8,ph:1,len:35},
-      {name:"תאורת חדרי ישיבות",type:"light",kw:1.2,ph:1,len:25},
-      {name:"שקעי עמדות עבודה א׳",type:"socket",kw:3.6,ph:1,len:30},
-      {name:"שקעי עמדות עבודה ב׳",type:"socket",kw:3.6,ph:1,len:35},
-      {name:"חדר תקשורת",type:"socket",kw:6,ph:3,len:15},
-      {name:"מטבחון",type:"socket",kw:3.6,ph:1,len:20},
-      {name:"דוד חשמל",type:"heat",kw:3,ph:1,len:18}
+      {name:"מיזוג VRF",type:"hvac",kw:22,ph:3,len:30,method:"E"},
+      {name:"תאורת אופן ספייס",type:"light",kw:2.8,ph:1,len:35,method:"B"},
+      {name:"תאורת חדרי ישיבות",type:"light",kw:1.2,ph:1,len:25,method:"B"},
+      {name:"שקעי עמדות עבודה",type:"socket",kw:7,ph:1,len:30,method:"B"},
+      {name:"חדר תקשורת",type:"socket",kw:6,ph:3,len:15,method:"B"},
+      {name:"מטבחון",type:"socket",kw:3.5,ph:1,len:20,method:"B"},
+      {name:"דוד חשמל",type:"heat",kw:3,ph:1,len:18,method:"B"}
     ]
   }
 };
-const DEMO=EXAMPLES.lab;
-const BLANK={customer:{name:"",company:"",email:"",phone:"",site:"",notes:""},supply:{ka:10,div:.8,vd:4},loads:[{name:"",type:"motor",kw:0,ph:3,len:20}]};
-let state;
-try{state=JSON.parse(localStorage.getItem("eltech-panel-v2"))}catch(e){}
-if(!state||!state.loads){state=JSON.parse(JSON.stringify(DEMO))}
+const ENG_DEFAULT={ks:.8,corr:.8,vdLight:3,vdOther:5,maxLightA:10,maxSockA:16,softKw:7.5,rcdLight:true,emergency:true,showPrice:false};
+const BLANK={customer:{name:"",company:"",email:"",phone:"",site:"",notes:""},project:{panel:"לוח ראשי",rev:"0"},supply:{conn:0,ka:10,earthing:"TN-C-S",feedLen:20,feedMethod:"D"},loads:[{name:"",type:"motor",kw:0,ph:3,len:20,method:"E"}]};
+
+// ================= state =================
+const KEY="eltech-panel-v3";
+const isCust=()=>location.hash.slice(1)==="customer";
+let state=null;
+try{state=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!state||!state.loads){state=JSON.parse(JSON.stringify(isCust()?BLANK:EXAMPLES.lab))}
+state.eng={...ENG_DEFAULT,...(state.eng||{})};
+state.project=state.project||{panel:"לוח ראשי",rev:"0"};
 state.pricing=state.pricing||{rate:220,margin:25};
 state.engineer=state.engineer||"אלירן קריספין";
-const save=()=>{try{localStorage.setItem("eltech-panel-v2",JSON.stringify(state))}catch(e){}};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
 
+// request link (?r=...) from a customer
+function b64e(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+function b64d(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";return JSON.parse(decodeURIComponent(escape(atob(s))))}
+function encodeReq(){return b64e({c:state.customer,p:state.project,s:{conn:+state.supply.conn||0,feedLen:+state.supply.feedLen||20},l:state.loads.filter(l=>+l.kw>0).map(l=>[l.name,l.type,+l.kw,+l.ph,+l.len,l.method||"E"])})}
+let fromCustomer=null;
+try{
+  const r=new URLSearchParams(location.search).get("r");
+  if(r){
+    const o=b64d(r);
+    state.customer={...BLANK.customer,...(o.c||{})};
+    state.project={...state.project,...(o.p||{})};
+    state.supply={...state.supply,...(o.s||{})};
+    state.loads=(o.l||[]).map(a=>({name:String(a[0]||""),type:TYPES[a[1]]?a[1]:"motor",kw:+a[2]||0,ph:+a[3]===1?1:3,len:+a[4]||20,method:METHODS[a[5]]?a[5]:"E"}));
+    if(!state.loads.length)state.loads=[{...BLANK.loads[0]}];
+    fromCustomer=state.customer.name||state.customer.company||"לקוח";
+    save();
+    history.replaceState(null,"",location.pathname+(location.hash&&location.hash!=="#customer"?location.hash:"#review"));
+  }
+}catch(e){}
+
+// ================= helpers =================
 const $=s=>document.querySelector(s);
 const fmt=(n,d=0)=>Number(n).toLocaleString("he-IL",{minimumFractionDigits:d,maximumFractionDigits:d});
+const f1=n=>(Math.round(n*10)/10).toString();
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const nextStd=v=>STD.find(s=>s>=v)||STD[STD.length-1];
+const nextIn=(list,v)=>list.find(s=>s>=v)||list[list.length-1];
 const get=(o,p)=>p.split(".").reduce((a,k)=>a?.[k],o);
-const set=(o,p,v)=>{const ks=p.split(".");const last=ks.pop();ks.reduce((a,k)=>a[k],o)[last]=v};
+const set=(o,p,v)=>{const ks=p.split(".");const last=ks.pop();ks.reduce((a,k)=>a[k]=a[k]||{},o)[last]=v};
+const sz=s=>s%1?String(s):String(s);
+function motorI(kw){
+  if(kw<=MOTOR[0][0])return MOTOR[0][1]*kw/MOTOR[0][0];
+  for(let i=1;i<MOTOR.length;i++){const[a,ia]=MOTOR[i-1],[b,ib]=MOTOR[i];if(kw<=b)return ia+(ib-ia)*(kw-a)/(b-a)}
+  return MOTOR[MOTOR.length-1][1]*kw/MOTOR[MOTOR.length-1][0];
+}
+function peSize(S){if(S<=16)return S;if(S<=35)return 16;return nextIn(SIZES,S/2)}
+function cableLabel(S,ph,fiveCore=true){const pe=peSize(S);if(ph===1)return `3×${sz(S)}`;if(S<=16)return fiveCore?`5×${sz(S)}`:`4×${sz(S)}`;return fiveCore?`4×${sz(S)}+${sz(pe)}`:`4×${sz(S)}`}
+const mccbIcu=v=>[25,36,50,70,100].find(x=>x>=v)||100;
+const mcbIcu=v=>[6,10,15,25].find(x=>x>=v);
 
-// ---------- bound fields ----------
-function bindFields(){
-  document.querySelectorAll("[data-k]").forEach(el=>{
-    el.value=get(state,el.dataset.k)??"";
-    el.oninput=()=>{set(state,el.dataset.k,el.hasAttribute("data-num")?parseFloat(el.value)||0:el.value);save();if(el.dataset.k==="engineer"&&!letterEdited)fillLetter()};
+// ================= engine =================
+function compute(){
+  const E=state.eng,S=state.supply;
+  const notes=[],info=[];
+  const kaSrc=+S.ka||10, earth=S.earthing==="TN-S"?"TN-S":"TN-C-S";
+  // 1. raw circuits with Ib, split large single-phase circuits
+  const raw=[];
+  state.loads.filter(l=>+l.kw>0).forEach(l=>{
+    const t=TYPES[l.type]||TYPES.motor, ph=+l.ph===1?1:3, kw=+l.kw;
+    let Ib,pf=t.pf;
+    if((l.type==="motor"||l.type==="vfd")&&ph===3)Ib=motorI(kw)*(l.type==="vfd"?0.95:1);
+    else if(l.type==="motor"||l.type==="vfd"){Ib=kw*1000/(U0*0.8*0.75);pf=.8}
+    else Ib=ph===3?kw*1000/(Math.sqrt(3)*UN*pf):kw*1000/(U0*pf);
+    let n=1;
+    if(ph===1&&l.type==="light")n=Math.ceil(Ib/(+E.maxLightA||10)-0.05);
+    if(ph===1&&l.type==="socket")n=Math.ceil(Ib/(+E.maxSockA||16)-0.05);
+    n=Math.max(1,n);
+    const nm=l.name||t.label;
+    for(let k=0;k<n;k++)raw.push({name:nm+(n>1?` ${k+1}/${n}`:""),type:l.type,kw:kw/n,ph,len:Math.max(1,+l.len||1),method:METHODS[l.method]?l.method:"E",Ib:Ib/n,pf});
+    if(n>1)info.push(`${nm}: חולק ל-${n} מעגלים כדי לא לעבור ${l.type==="light"?E.maxLightA:E.maxSockA}A למעגל.`);
   });
+  // 2. phase balance
+  const P=[0,0,0];
+  raw.filter(c=>c.ph===3).forEach(c=>{P[0]+=c.Ib;P[1]+=c.Ib;P[2]+=c.Ib;c.phase="L123"});
+  raw.filter(c=>c.ph===1).sort((a,b)=>b.Ib-a.Ib).forEach(c=>{const k=P.indexOf(Math.min(...P));P[k]+=c.Ib;c.phase="L"+(k+1)});
+  const ks=+E.ks||.8;
+  const Pinst=raw.reduce((s,c)=>s+c.kw,0), Pdem=Pinst*ks;
+  const Idem=Math.max(...P)*ks;
+  const connAuto=nextIn(CONN,Idem);
+  const conn=+S.conn>0?+S.conn:connAuto;
+  if(+S.conn>0&&+S.conn<Idem)notes.push(`גודל החיבור 3×${S.conn}A קטן מהזרם המחושב (${fmt(Idem)}A). נדרש לפחות 3×${connAuto}A.`);
+  const maxP=Math.max(...P),minP=Math.min(...P);
+  if(minP>0&&maxP/minP>1.25)notes.push(`חוסר איזון פאזות: L1 ${fmt(P[0])}A, L2 ${fmt(P[1])}A, L3 ${fmt(P[2])}A.`);
+  // 3. main device and feeder
+  const mainMccb=conn>63||!mcbIcu(kaSrc);
+  const frame=mainMccb?nextIn(FRAMES,conn):conn;
+  const poles=earth==="TN-S"?4:3;
+  const Zs=U0/(kaSrc*1000);           // source impedance (mainly reactive), ohm
+  const fm=METHODS[S.feedMethod]||METHODS.D, fL=Math.max(1,+S.feedLen||1);
+  let fi=SIZES.findIndex((s,k)=>s>=10&&fm.t3[k]*E.corr>=conn); if(fi<0){fi=SIZES.length-1;notes.push("כבל ההזנה חורג מהטבלה: נדרשים כבלים במקביל או פסי צבירה.")}
+  const vdF=k=>Math.sqrt(3)*Idem*fL*(RHO/SIZES[k]*0.9+XL*0.436)/UN*100;
+  while(vdF(fi)>2&&fi<SIZES.length-1)fi++;
+  const Sf=SIZES[fi], vdFeed=vdF(fi), Rf=RHO*fL/Sf, Xf=XL*fL;
+  const IkP=1.05*U0/Math.hypot(Rf,Zs+Xf)/1000;          // max 3-phase fault at panel, kA
+  const IkPr=Math.ceil(IkP*10)/10;
+  const loopR0=2*Rf, loopX0=Zs+2*Xf;                       // phase-PE(N) loop up to panel
+  const mainIcu=mainMccb?mccbIcu(IkP):mcbIcu(IkP);
+  const bus=nextIn(BUS,frame);
+  const ct=conn>63?nextIn(CTS,conn):0;
+  // 4. circuits
+  const circuits=raw.map((c,i)=>{
+    const out={...c,id:"F"+(i+1)};
+    let dev,start="";
+    if(c.type==="motor"&&c.ph===3&&c.kw<=E.softKw){
+      start="dol";
+      const r=MPCB.find(([lo,hi])=>c.Ib>=lo&&c.Ib<=hi)||MPCB.find(([lo,hi])=>hi>=c.Ib)||MPCB[MPCB.length-1];
+      dev={kind:"MPCB",lo:r[0],hi:r[1],Iset:Math.round(c.Ib*10)/10,In:r[1],Ia:Math.round(13*r[1]),icu:IkP<=50?50:mccbIcu(IkP)};
+      out.cont=nextIn(CONT,c.Ib);
+    }else{
+      let target=c.Ib;
+      if(c.type==="motor")target=c.Ib*(c.ph===3?1.15:1.25);
+      if(c.type==="vfd")target=c.Ib*1.1;
+      const minIn={light:10,socket:16}[c.type]||6;
+      const In=nextIn(STD,Math.max(Math.round(target*10)/10,minIn));
+      const icuM=mcbIcu(IkP), mccb=In>63||!icuM;
+      const curve=mccb?"":(c.type==="light"?"B":c.type==="motor"?"D":"C");
+      dev={kind:mccb?"MCCB":"MCB",In,Iset:In,curve,icu:mccb?mccbIcu(IkP):icuM,Ia:(mccb?10:{B:5,C:10,D:20}[curve])*In,frame:mccb?nextIn(FRAMES,In):In};
+      if(c.type==="motor"&&c.ph===3)start="soft";
+      if(c.type==="vfd")start="vfd";
+      if(c.type==="motor"&&c.ph===1){start="dol";out.cont=nextIn(CONT,c.Ib)}
+    }
+    out.dev=dev;out.start=start;
+    let rcd=0;
+    if(c.type==="socket")rcd=dev.In<=32?30:300;
+    if(c.type==="light"&&E.rcdLight)rcd=30;
+    out.rcd=rcd;out.rcdIn=rcd?nextIn(RCDS,dev.In):0;
+    // cable
+    const m=METHODS[c.method], tbl=c.ph===3?m.t3:m.t2, minS=c.type==="light"?1.5:2.5;
+    let k=SIZES.findIndex((s,j)=>s>=minS&&tbl[j]*E.corr>=dev.Iset);
+    const why=[];
+    if(k<0){k=SIZES.length-1;why.push("הזרם חורג מהטבלה, נדרשים כבלים במקביל")}
+    const k0=k;
+    const lim=c.type==="light"?+E.vdLight:+E.vdOther;
+    const sinp=Math.sqrt(Math.max(0,1-c.pf*c.pf));
+    const vd=j=>(c.ph===3?Math.sqrt(3):2)*c.Ib*c.len*(RHO/SIZES[j]*c.pf+XL*sinp)/(c.ph===3?UN:U0)*100;
+    while(vd(k)+vdFeed>lim&&k<SIZES.length-1)k++;
+    if(k>k0)why.push("הוגדל בגלל מפל מתח");
+    const ik1=j=>{const Sj=SIZES[j],pe=peSize(Sj);return 0.95*U0/Math.hypot(loopR0+RHO*c.len/Sj+RHO*c.len/pe,loopX0+2*XL*c.len)};
+    const k1=k;
+    if(!rcd)while(ik1(k)<dev.Ia&&k<SIZES.length-1)k++;
+    if(k>k1)why.push("הוגדל לניתוק אוטומטי בקצר");
+    out.S=SIZES[k];out.Iz=tbl[k]*E.corr;out.vd=vd(k)+vdFeed;out.vdLim=lim;out.ik1=ik1(k);
+    out.ads=rcd?"rcd":(out.ik1>=dev.Ia?"ok":"fail");
+    out.cable=cableLabel(out.S,c.ph);
+    out.why=why;
+    why.forEach(w=>info.push(`${out.id} ${c.name}: כבל ${w}.`));
+    if(out.vd>lim)notes.push(`${out.id} ${c.name}: מפל מתח ${f1(out.vd)}% מעל ${lim}% גם בחתך המרבי.`);
+    if(out.ads==="fail")notes.push(`${out.id} ${c.name}: זרם הקצר בקצה הקו (${fmt(out.ik1)}A) נמוך מזרם הניתוק המגנטי (${fmt(dev.Ia)}A). נדרש ממסר פחת או קיצור הקו.`);
+    if(dev.In>frame/1.6)notes.push(`${out.id} ${c.name}: הגנה ${dev.In}A קרובה למפסק הראשי (${frame}A). יש לבדוק סלקטיביות לפי טבלאות היצרן.`);
+    return out;
+  });
+  if(circuits.some(c=>c.start==="vfd"))info.push("ממירי תדר: אם יידרש ממסר פחת על המעגל, יש להשתמש בסוג B.");
+  if(IkP>10)info.push(`זרם קצר בלוח כ-${f1(IkPr)}kA: מאמ״תים נבחרו עם כושר ניתוק מתאים. אפשר לשקול תיאום Cascading לפי טבלאות היצרן.`);
+
+  // 5. BOM
+  const bom=[];const add=(name,price,qty=1)=>{const r=bom.find(b=>b.name===name);r?r.qty+=qty:bom.push({name,price,qty})};
+  const mccbPrice=f=>({100:700,160:900,250:1600,400:3200,630:6000,800:9500,1000:14000,1250:18000})[f]||18000;
+  let modules=0,big=0;
+  if(mainMccb){add(`מפסק ראשי MCCB ${poles}P In=${frame}A Ir=${conn}A Icu=${mainIcu}kA`,mccbPrice(frame));big+=frame<=250?1:2}
+  else{add(`מפסק ראשי ${poles}P ${conn}A C Icu=${mainIcu}kA`,poles===4?320:260);modules+=poles}
+  if(E.emergency){add("סליל הפסקה (Shunt trip) למפסק הראשי",350);add("לחצן חירום עם נעילה",180)}
+  add(`מגן מתח יתר SPD Type 2 ${earth==="TN-S"?"3+NPE":"3P"}`,650);modules+=4;
+  add(`מאמ״ת גיבוי ל-SPD ${poles===4?"4":"3"}P 32A C`,poles===4?260:110);modules+=poles;
+  add("נורות סימון פאזות עם מבטחים 3×2A",85,3);modules+=6;
+  if(ct){add(`רב-מודד (Power meter)`,950);add(`משנה זרם ${ct}/5A`,140,3)}else{add("רב-מודד ישיר למסילה",650);modules+=4}
+  add(`פסי צבירה נחושת 3×${bus}A + N`,Math.round(bus*3.6));
+  add("פסי N ו-PE, מהדק השוואת פוטנציאלים",260);
+  circuits.forEach(c=>{
+    const d=c.dev,p=c.ph===3?3:1;
+    if(d.kind==="MPCB"){add(`מגן מנוע ${d.lo}–${d.hi}A`,d.hi<=32?260:620);modules+=3}
+    else if(d.kind==="MCCB"){add(`מפסק MCCB ${p}P ${d.In}A ${d.icu}kA`,mccbPrice(d.frame));big+=.5}
+    else{add(`מאמ״ת ${p}P ${d.In}A ${d.curve} ${d.icu}kA`,p===1?(d.In<=20?30:45):(d.In>32?220:110));modules+=p}
+    if(c.rcd){add(`ממסר פחת ${c.ph===3?"4P":"2P"} ${c.rcdIn}A ${c.rcd}mA Type A`,c.ph===3?(c.rcdIn<=40?320:420):160);modules+=c.ph===3?4:2}
+    if(c.start==="dol"){add(`מגען ${c.cont}A AC-3`,c.cont<=25?180:c.cont<=40?320:c.cont<=65?600:c.cont<=115?1100:2200);if(c.cont<=40)modules+=3;else big+=.5}
+    if(c.start==="soft"){add(`מתנע רך ${fmt(c.kw,1)} קו״ט`,Math.round(700+120*c.kw));big+=1}
+    if(c.start==="vfd"){add(`ממיר תדר ${fmt(c.kw,1)} קו״ט`,Math.round(900+280*c.kw));big+=c.kw>22?2:1}
+  });
+  const rows=Math.max(1,Math.ceil(modules*1.2/24));
+  const hNeed=rows*150+Math.ceil(big)*300+250;
+  const HS=[600,800,1000,1200,1400,1600,1800,2000,2200];
+  const encH=nextIn(HS,hNeed), floor=encH>1200;
+  const encW=big>4?1000:(big>0||floor)?800:600, encD=floor?400:250;
+  if(hNeed>2200)notes.push("הציוד לא נכנס בשדה אחד. נדרש לוח רב-שדות.");
+  add(`ארון ${floor?"עומד":"תלוי"} ${encH}×${encW}×${encD} מ״מ IP54, לפי ת״י 61439`,floor?Math.round(3500+encH*1.5+(encW>=800?800:0)):Math.round(600+encH*1.2));
+  const comp=bom.reduce((s,b)=>s+b.price*b.qty,0);
+  add("חיווט, מהדקים, תעלות ושילוט",Math.round(comp*.12));
+  const materials=bom.reduce((s,b)=>s+b.price*b.qty,0);
+  const nBig=circuits.filter(c=>c.start==="vfd"||c.start==="soft").length;
+  const hours=8+1.5*circuits.length+2*nBig+(floor?4:0)+(E.emergency?1:0);
+  const labor=hours*(+state.pricing.rate||0);
+  const net=Math.round((materials+labor)*(1+(+state.pricing.margin||0)/100)/10)*10;
+  const days=10+(nBig?5:0)+(floor?5:0);
+  return {kaSrc,earth,circuits,P,ks,Pinst,Pdem,Idem,conn,connAuto,mainMccb,frame,poles,mainIcu,bus,ct,Sf,fL,vdFeed,IkP:IkPr,bom,materials,hours,labor,net,gross:Math.round(net*(1+VAT)),days,encH,encW,encD,floor,notes,info,nBig};
 }
 
-// ---------- loads editor ----------
+// ================= single-line diagram =================
+function sld(r){
+  const n=r.circuits.length,colW=86,labW=120,mainW=200,svcW=160,pad=14;
+  const W=Math.max(1120,pad*2+labW+mainW+n*colW+svcW), H=930;
+  const xr=W-pad, xm=xr-labW-mainW/2;
+  const xc=i=>xr-labW-mainW-colW*(i+.5);
+  const xEnd=xr-labW-mainW-n*colW;
+  const xs1=xEnd-45, xs2=xEnd-120;
+  const yB=232, yT=556, rh=24;
+  const L=t=>"\u2066"+t+"\u2069";
+  const T=(x,y,t,o={})=>`<text x="${x}" y="${y}" font-size="${o.fs||10.5}"${o.a?` text-anchor="${o.a}"`:""}${o.b?' font-weight="700"':""}${o.m?' class="m"':""}${o.rtl?' direction="rtl"':""}${o.rot?` transform="rotate(-90 ${x} ${y})"`:""}>${esc(t)}</text>`;
+  const brk=(x,y)=>`<path class="w" d="M${x} ${y}v12M${x} ${y+12}l12 22M${x} ${y+38}v12"/><path class="w" d="M${x-4} ${y+8}l8 8M${x+4} ${y+8}l-8 8"/>`;
+  const earthSym=(x,y)=>`<path class="w" d="M${x} ${y}v8M${x-10} ${y+8}h20M${x-6} ${y+12}h12M${x-2.5} ${y+16}h5"/>`;
+  const load=(c,x,y)=>{
+    if(c.type==="light")return `<circle class="w bg" cx="${x}" cy="${y}" r="13"/><path class="w" d="M${x-9.2} ${y-9.2}l18.4 18.4M${x+9.2} ${y-9.2}l-18.4 18.4"/>`;
+    if(c.type==="socket")return `<path class="w" d="M${x} ${y-13}v6M${x-14} ${y+7}a14 14 0 0 1 28 0zM${x-14} ${y+11}h28"/>`;
+    if(c.type==="heat")return `<rect class="w bg" x="${x-15}" y="${y-11}" width="30" height="22"/><path class="w" d="M${x-10} ${y}l4 -6l4 12l4 -12l4 12l4 -6"/>`;
+    if(c.type==="feeder")return `<rect class="w bg" x="${x-17}" y="${y-12}" width="34" height="24"/>`+T(x,y+4,"ל.מ.",{a:"middle",fs:10,b:1,rtl:1});
+    const lbl=c.type==="hvac"?"AC":"M";
+    return `<circle class="w bg" cx="${x}" cy="${y}" r="15"/>`+T(x,y+1,lbl,{a:"middle",fs:12,b:1})+(lbl==="M"?T(x,y+11,c.ph===3?"3~":"1~",{a:"middle",fs:8}):"");
+  };
+  let s=`<svg class="sld" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" direction="ltr" style="direction:ltr" role="img" aria-label="סכמה חד-קווית של ${esc(state.project.panel||"הלוח")}">`;
+  s+=`<rect x="${pad/2}" y="${pad/2}" width="${W-pad}" height="${H-pad}" class="fr"/>`;
+  // ---- incomer ----
+  s+=T(xm,32,`חיבור חח״י ${L("3×"+r.conn+"A")}`,{a:"middle",b:1,fs:12.5,rtl:1});
+  s+=T(xm,48,`400/230V 50Hz · ${r.earth} · Ik=${r.kaSrc}kA`,{a:"middle",fs:10.5,m:1});
+  s+=`<path class="w" d="M${xm} 56v96"/><path class="w" d="M${xm-5} 62l5 -8l5 8"/>`;
+  s+=T(xm+14,104,`N2XY ${cableLabel(r.Sf,3,r.earth==="TN-S")} · ${r.fL}m`,{a:"middle",fs:10,rot:1});
+  if(r.earth==="TN-C-S")s+=T(xm-12,104,"PEN",{a:"middle",fs:9,m:1,rot:1});
+  s+=brk(xm,152);
+  const mainL=[`Q0 · ${r.mainMccb?"MCCB":"MCB"} ${r.poles}P`,r.mainMccb?`In=${r.frame}A  Ir=${r.conn}A`:`${r.conn}A  C`,`Icu=${r.mainIcu}kA`];
+  mainL.forEach((t,k)=>{s+=T(xm-18,166+k*14,t,{a:"end",fs:10.5,b:k===0})});
+  if(state.eng.emergency){
+    s+=`<path class="d" d="M${xm+8} 176h28"/><rect class="w bg" x="${xm+36}" y="168" width="22" height="16"/>`+T(xm+47,180,"MX",{a:"middle",fs:9,b:1});
+    s+=`<path class="d" d="M${xm+58} 176h12"/><path class="w" d="M${xm+70} 170v12M${xm+70} 176h6"/><path class="w" d="M${xm+76} 168a8 8 0 0 1 0 16z" style="fill:var(--hazard)"/>`;
+    s+=T(xm+62,198,"לחצן חירום",{a:"middle",fs:9,m:1,rtl:1});
+  }
+  s+=`<path class="w" d="M${xm} 202v${yB-202}"/>`;
+  if(r.ct){s+=`<circle class="w" cx="${xm}" cy="214" r="6"/><circle class="w" cx="${xm}" cy="214" r="2"/>`;}
+  s+=`<path class="d" d="M${xm+(r.ct?6:0)} 214h${r.ct?26:32}"/><rect class="w bg" x="${xm+32}" y="205" width="28" height="18"/>`+T(xm+46,218,"PM",{a:"middle",fs:9.5,b:1});
+  s+=T(xm+64,219,r.ct?`CT ${r.ct}/5A`:"מדידה ישירה",{fs:9,m:1,rtl:!r.ct});
+  // ---- busbar ----
+  const bx0=xs2-26, bx1=xm+40;
+  ["--l1","--l2","--l3"].forEach((v,k)=>{s+=`<line x1="${bx0}" x2="${bx1}" y1="${yB+k*4}" y2="${yB+k*4}" stroke="var(${v})" stroke-width="3.2"/>`});
+  s+=T(bx0+2,yB-7,`3×${r.bus}A + N`,{fs:10,b:1});
+  // N / PE bars at incomer
+  s+=`<line x1="${xm-46}" x2="${xm+46}" y1="${yB+32}" y2="${yB+32}" stroke="var(--nn)" stroke-width="3"/>`+T(xm+50,yB+36,"N",{fs:10,b:1});
+  s+=`<line x1="${xm-46}" x2="${xm+46}" y1="${yB+54}" y2="${yB+54}" stroke="var(--pe)" stroke-width="3" stroke-dasharray="7 4"/>`+T(xm+50,yB+58,"PE",{fs:10,b:1});
+  if(r.earth==="TN-C-S"){s+=`<path class="w" d="M${xm-30} ${yB+32}v22"/>`+T(xm-34,yB+47,"PEN",{a:"end",fs:9,m:1})}
+  s+=earthSym(xm,yB+54)+T(xm,yB+86,"להארקת יסוד",{a:"middle",fs:9,m:1,rtl:1});
+  // ---- services: SPD + lamps ----
+  s+=`<path class="w" d="M${xs1} ${yB+8}v18"/>`+brk(xs1,yB+26)+`<path class="w" d="M${xs1} ${yB+76}v14"/><rect class="w bg" x="${xs1-12}" y="${yB+90}" width="24" height="30"/><path class="w" d="M${xs1} ${yB+95}v14l-4 -5M${xs1} ${yB+109}l4 -5"/><path class="w" d="M${xs1} ${yB+120}v10"/>`+earthSym(xs1,yB+130);
+  s+=T(xs1-16,yB+44,"32A C",{a:"end",fs:9,m:1});
+  s+=`<path class="w" d="M${xs2} ${yB+8}v24"/><rect class="w bg" x="${xs2-5}" y="${yB+32}" width="10" height="26"/><path class="w" d="M${xs2} ${yB+32}v26M${xs2} ${yB+58}v22"/><circle class="w bg" cx="${xs2}" cy="${yB+92}" r="11"/><path class="w" d="M${xs2-7.8} ${yB+84.2}l15.6 15.6M${xs2+7.8} ${yB+84.2}l-15.6 15.6"/>`;
+  s+=T(xs2-10,yB+50,"3×2A",{a:"end",fs:9,m:1});
+  // ---- circuits ----
+  r.circuits.forEach((c,i)=>{
+    const x=xc(i);let y=yB+8;
+    s+=`<path class="w" d="M${x} ${y}v18"/>`;y+=18;
+    s+=brk(x,y);
+    if(c.dev.kind==="MPCB")s+=`<rect class="w bg" x="${x+12}" y="${y+16}" width="12" height="10"/><path class="w" d="M${x+14} ${y+21}h8"/>`;
+    s+=T(x-8,y+22,"Q"+(i+1),{a:"end",fs:10,b:1});
+    y+=50;
+    if(c.rcd){s+=`<path class="w" d="M${x} ${y}v28"/><ellipse class="w" cx="${x}" cy="${y+14}" rx="10" ry="4.5"/>`+T(x+13,y+18,"IΔ",{fs:9.5,m:1});y+=28}
+    else{s+=`<path class="w" d="M${x} ${y}v28"/>`;y+=28}
+    if(c.start==="dol"){s+=`<path class="w" d="M${x} ${y}v8M${x} ${y+8}l11 20M${x} ${y+32}v8"/><path class="w" d="M${x-5} ${y+32}a5 5 0 0 1 10 0"/>`+T(x+14,y+26,"K"+(i+1),{fs:9.5,m:1});y+=40}
+    else if(c.start==="vfd"||c.start==="soft"){s+=`<path class="w" d="M${x} ${y}v4"/><rect class="w bg" x="${x-17}" y="${y+4}" width="34" height="32"/>`;
+      if(c.start==="vfd")s+=`<path class="w" d="M${x-17} ${y+36}l34 -32"/>`+T(x-8,y+17,"~",{a:"middle",fs:11})+T(x+8,y+32,"~",{a:"middle",fs:11});
+      else s+=T(x,y+24,"SS",{a:"middle",fs:10,b:1});
+      s+=`<path class="w" d="M${x} ${y+36}v4"/>`;y+=40}
+    else{s+=`<path class="w" d="M${x} ${y}v40"/>`;y+=40}
+    const ly=yT-48;
+    s+=`<path class="w" d="M${x} ${y}V${ly-15}"/>`;
+    s+=T(x+11,(y+ly-15)/2,`N2XY ${c.cable}`,{a:"middle",fs:9.5,rot:1});
+    s+=load(c,x,ly);
+  });
+  // ---- table under the drawing ----
+  const rowsDef=[["מעגל",c=>c.id,"Q0"],["תיאור",c=>c.name.length>12?c.name.slice(0,11)+"…":c.name,"מפסק ראשי"],["פאזה",c=>c.phase,"L123"],["הספק [kW]",c=>f1(c.kw),f1(r.Pdem)],["Ib [A]",c=>f1(c.Ib),f1(r.Idem)],
+    ["הגנה",c=>c.dev.kind==="MPCB"?`MPCB ${c.dev.lo}-${c.dev.hi}`:c.dev.kind==="MCCB"?`MCCB ${c.dev.In}A`:`${c.dev.curve}${c.dev.In} ${c.ph===3?"3P":"1P"}`,r.mainMccb?`MCCB ${r.conn}A`:`C${r.conn} ${r.poles}P`],
+    ["Icu [kA]",c=>c.dev.icu,r.mainIcu],["פחת",c=>c.rcd?`${c.rcdIn}A ${c.rcd}mA`:"—","—"],["כבל N2XY",c=>c.cable,cableLabel(r.Sf,3,r.earth==="TN-S")],["אורך [m]",c=>c.len,r.fL],["ΔU [%]",c=>f1(c.vd),f1(r.vdFeed)]];
+  const tx0=bx0-10, tw=xr-tx0;
+  s+=`<rect class="g" x="${tx0}" y="${yT}" width="${tw}" height="${rowsDef.length*rh}"/>`;
+  rowsDef.forEach((row,k)=>{
+    const y=yT+k*rh;
+    if(k)s+=`<line class="g" x1="${tx0}" x2="${xr}" y1="${y}" y2="${y}"/>`;
+    s+=T(xr-6,y+16,row[0],{fs:10,b:1,rtl:1});
+    s+=T(xm,y+16,row[2],{a:"middle",fs:10,rtl:k===1});
+    r.circuits.forEach((c,i)=>{const v=row[1](c);const bad=(k===10&&c.vd>c.vdLim);s+=`<text x="${xc(i)}" y="${y+16}" font-size="10" text-anchor="middle"${k===1?' direction="rtl"':""}${bad?' style="fill:var(--bad);font-weight:700"':""}>${esc(v)}</text>`});
+    if(k===1){s+=T(xs1,y+16,"מגן ברקים",{a:"middle",fs:10,rtl:1})+T(xs2,y+16,"נורות סימון",{a:"middle",fs:10,rtl:1})}
+    if(k===5){s+=T(xs1,y+16,"SPD T2",{a:"middle",fs:10})+T(xs2,y+16,"F 3×2A",{a:"middle",fs:10})}
+  });
+  s+=`<line class="g" x1="${xr-labW}" x2="${xr-labW}" y1="${yT}" y2="${yT+rowsDef.length*rh}"/><line class="g" x1="${xr-labW-mainW}" x2="${xr-labW-mainW}" y1="${yT}" y2="${yT+rowsDef.length*rh}"/>`;
+  for(let i=1;i<n;i++)s+=`<line class="g" x1="${xr-labW-mainW-colW*i}" x2="${xr-labW-mainW-colW*i}" y1="${yT}" y2="${yT+rowsDef.length*rh}"/>`;
+  s+=`<line class="g" x1="${xEnd}" x2="${xEnd}" y1="${yT}" y2="${yT+rowsDef.length*rh}"/>`;
+  // ---- title block ----
+  const tbY=yT+rowsDef.length*rh+22, tbH=H-pad/2-tbY-8, tbx1=xr, tbx0=pad;
+  s+=`<rect class="fr" x="${tbx0}" y="${tbY}" width="${tbx1-tbx0}" height="${tbH}"/>`;
+  const cells=[250,280,300,170];let cx=tbx1;
+  const cx0=cx;cx-=cells[0];s+=`<line class="fr" x1="${cx}" x2="${cx}" y1="${tbY}" y2="${tbY+tbH}"/>`;
+  s+=`<rect x="${cx0-246}" y="${tbY+6}" width="128" height="50" fill="#FFFFFF"/><image href="${LOGO()}" x="${cx0-244}" y="${tbY+8}" width="124" height="46" preserveAspectRatio="xMidYMid meet"/>`;
+  s+=T(cx0-8,tbY+22,"Eltech - Eliran Krispin",{a:"end",fs:10.5,b:1})+T(cx0-8,tbY+38,"052-4341604",{a:"end",fs:9.5,m:1})+T(cx0-8,tbY+52,"050-7878486",{a:"end",fs:9.5,m:1})+T(cx0-8,tbY+66,"Eltechproj@gmail.com",{a:"end",fs:9.5,m:1});
+  const c2=cx;cx-=cells[1];s+=`<line class="fr" x1="${cx}" x2="${cx}" y1="${tbY}" y2="${tbY+tbH}"/>`;
+  const cu=state.customer;
+  s+=T(c2-8,tbY+20,"פרויקט / לקוח",{fs:9.5,m:1,rtl:1})+T(c2-8,tbY+38,(cu.company||cu.name||"—").slice(0,34),{fs:11.5,b:1,rtl:1})+T(c2-8,tbY+56,(cu.site||"").slice(0,38),{fs:10,rtl:1});
+  const c3=cx;cx-=cells[2];s+=`<line class="fr" x1="${cx}" x2="${cx}" y1="${tbY}" y2="${tbY+tbH}"/>`;
+  s+=T(c3-8,tbY+20,"שם הלוח",{fs:9.5,m:1,rtl:1})+T(c3-8,tbY+38,(state.project.panel||"לוח ראשי").slice(0,30),{fs:11.5,b:1,rtl:1});
+  s+=T(c3-8,tbY+56,`הספק מותקן ${L(f1(r.Pinst)+" kW")} · ביקוש ${L(f1(r.Pdem)+" kW")} · ${L("ks="+r.ks)}`,{fs:9.5,rtl:1});
+  s+=T(c3-8,tbY+72,`זרם קצר בלוח ${L("≈ "+r.IkP+" kA")} · ת״י 61439 · ${L("IP54")}`,{fs:9.5,rtl:1});
+  const c4=cx;cx-=cells[3];s+=`<line class="fr" x1="${cx}" x2="${cx}" y1="${tbY}" y2="${tbY+tbH}"/>`;
+  const d=new Date();
+  s+=T(c4-8,tbY+20,`תאריך: ${L(d.toLocaleDateString("he-IL"))}`,{fs:9.5,rtl:1})+T(c4-8,tbY+38,`גרסה: ${state.project.rev||"0"}`,{fs:9.5,rtl:1})+T(c4-8,tbY+56,`שרטט: ${L("Eltech")}`,{fs:9.5,rtl:1})+T(c4-8,tbY+72,"גיליון 1 מתוך 1",{fs:9.5,rtl:1});
+  s+=`<text x="${(cx+tbx0)/2}" y="${tbY+34}" font-size="15" font-weight="700" text-anchor="middle" direction="rtl" class="stamp">סקיצה ראשונית</text>`;
+  s+=T((cx+tbx0)/2,tbY+54,"לא לביצוע ללא חתימת מהנדס",{a:"middle",fs:10,m:1,rtl:1});
+  return s+"</svg>";
+}
+
+// ================= form =================
+function bindFields(){
+  document.querySelectorAll("[data-k]").forEach(el=>{
+    const v=get(state,el.dataset.k);
+    if(el.hasAttribute("data-bool"))el.checked=!!v;else el.value=v??"";
+    el.oninput=el.onchange=()=>{
+      const val=el.hasAttribute("data-bool")?el.checked:el.hasAttribute("data-num")?(parseFloat(el.value)||0):el.value;
+      set(state,el.dataset.k,val);save();
+      if(el.dataset.k==="engineer"&&!letterEdited)fillLetter();
+      scheduleLive();
+    };
+  });
+}
 function renderLoads(){
   const box=$("#loads");
   box.innerHTML=state.loads.map((l,i)=>`
   <div class="lrow" data-i="${i}">
     <label class="nm">שם הצרכן<input data-f="name" value="${esc(l.name)}" placeholder="למשל: משאבה 2"></label>
     <label class="ty">סוג<select data-f="type">${Object.entries(TYPES).map(([k,t])=>`<option value="${k}"${k===l.type?" selected":""}>${t.label}</option>`).join("")}</select></label>
-    <label>הספק (קו״ט)<input data-f="kw" type="number" min="0" step="0.1" value="${l.kw}"></label>
-    <label>פאזות<select data-f="ph"><option value="3"${l.ph==3?" selected":""}>3</option><option value="1"${l.ph==1?" selected":""}>1</option></select></label>
-    <label>אורך כבל (מ׳)<input data-f="len" type="number" min="1" step="1" value="${l.len}"></label>
+    <label>הספק (קו״ט)<input data-f="kw" type="number" inputmode="decimal" min="0" step="0.1" value="${l.kw||""}"></label>
+    <label>פאזות<select data-f="ph"><option value="3"${l.ph!=1?" selected":""}>3</option><option value="1"${l.ph==1?" selected":""}>1</option></select></label>
+    <label>אורך כבל (מ׳)<input data-f="len" type="number" inputmode="numeric" min="1" step="1" value="${l.len}"></label>
+    <label class="md eng-only">התקנה<select data-f="method">${Object.entries(METHODS).map(([k,m])=>`<option value="${k}"${k===(l.method||"E")?" selected":""}>${m.label}</option>`).join("")}</select></label>
     <button type="button" class="x" aria-label="מחק את ${esc(l.name||"הצרכן")}" data-del="${i}">✕</button>
   </div>`).join("");
   box.querySelectorAll(".lrow").forEach(row=>{
     const i=+row.dataset.i;
     row.querySelectorAll("[data-f]").forEach(el=>{
-      el.oninput=()=>{const f=el.dataset.f;state.loads[i][f]=(f==="name"||f==="type")?el.value:parseFloat(el.value)||0;save()};
+      el.oninput=el.onchange=()=>{const f=el.dataset.f;state.loads[i][f]=(f==="name"||f==="type"||f==="method")?el.value:parseFloat(el.value)||0;
+        if(f==="type"&&(el.value==="light"||el.value==="hvac")&&state.loads[i].ph===3&&state.loads[i].kw<6){state.loads[i].ph=1;row.querySelector('[data-f="ph"]').value="1"}
+        save();scheduleLive()};
     });
   });
-  box.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{state.loads.splice(+b.dataset.del,1);if(!state.loads.length)state.loads.push({...BLANK.loads[0]});save();renderLoads()});
+  box.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{state.loads.splice(+b.dataset.del,1);if(!state.loads.length)state.loads.push({...BLANK.loads[0]});save();renderLoads();scheduleLive()});
 }
-$("#addLoad").onclick=()=>{state.loads.push({name:"",type:"motor",kw:0,ph:3,len:20});save();renderLoads();const r=$("#loads").lastElementChild.querySelector("input");r&&r.focus()};
-$("#loadDemo").onclick=()=>{const keep={pricing:state.pricing,engineer:state.engineer};state={...JSON.parse(JSON.stringify(EXAMPLES[$("#demoSel").value]||DEMO)),...keep};letterEdited=false;save();bindFields();renderLoads()};
+$("#addLoad").onclick=()=>{state.loads.push({name:"",type:"motor",kw:0,ph:3,len:20,method:"E"});save();renderLoads();const r=$("#loads").lastElementChild.querySelector("input");r&&r.focus()};
+$("#loadDemo").onclick=()=>{const ex=JSON.parse(JSON.stringify(EXAMPLES[$("#demoSel").value]||EXAMPLES.lab));Object.assign(state,ex);letterEdited=false;fromCustomer=null;showFrom();save();bindFields();renderLoads();scheduleLive()};
+$("#clearLoads").onclick=()=>{Object.assign(state,JSON.parse(JSON.stringify(BLANK)));save();bindFields();renderLoads();scheduleLive()};
 $("#toReview").onclick=()=>{location.hash="review"};
+const baseUrl=()=>location.origin+location.pathname;
+$("#custLinkBtn").onclick=async()=>{
+  const link=baseUrl()+"#customer";$("#custLink").value=link;$("#custLinkBox").hidden=false;
+  try{await navigator.clipboard.writeText(link);$("#custLinkBtn").textContent="הקישור הועתק"}catch(e){$("#custLink").select()}
+};
 
-// ---------- engine ----------
-function mccbPrice(In){return In<=160?900:In<=250?1600:In<=400?3200:In<=630?6000:9500}
-function contPrice(kw){return kw<=5.5?180:kw<=11?320:kw<=22?600:1100}
-
-function compute(){
-  const ka=+state.supply.ka||10, div=+state.supply.div||.8, vdLim=+state.supply.vd||4;
-  const loads=state.loads.filter(l=>+l.kw>0);
-  const notes=[];
-  const circuits=loads.map((l,i)=>{
-    const t=TYPES[l.type]||TYPES.motor, ph=+l.ph===1?1:3, U=ph===3?400:230;
-    const Ib=l.kw*1000/((ph===3?Math.sqrt(3)*400:230)*t.pf*t.eff);
-    const minIn=l.type==="socket"?16:l.type==="light"?10:6;
-    const In=nextStd(Math.max(Ib*(l.type==="motor"?1.25:1.05),minIn));
-    const mccb=In>63||ka>10;
-    const icu=mccb?([25,36,50,70].find(v=>v>=ka)||70):10;
-    const curve=mccb?"":({motor:"D",light:"B"}[l.type]||"C");
-    const tbl=ph===3?IZ3:IZ2, minS=l.type==="light"?1.5:2.5;
-    let si=CAB.findIndex((s,k)=>s>=minS&&tbl[k]>=In); if(si<0)si=CAB.length-1;
-    const base=si;
-    const vd=k=>(ph===3?Math.sqrt(3):2)*Ib*l.len*(RHO/CAB[k])*t.pf/U*100;
-    while(vd(si)>vdLim&&si<CAB.length-1)si++;
-    const start=l.type==="motor"?(l.kw>7.5?"soft":"dol"):l.type==="vfd"?"vfd":"";
-    const rcd=(l.type==="light"||l.type==="socket")?30:0;
-    const cnotes=[];
-    if(si>base)cnotes.push("כבל הוגדל בגלל מפל מתח");
-    if(vd(si)>vdLim)cnotes.push("מפל מתח חורג גם בחתך המרבי");
-    if(start==="soft")cnotes.push("מעל 7.5 קו״ט: מתנע רך");
-    return {id:"Q"+(i+2),name:l.name||("צרכן "+(i+1)),type:l.type,kw:+l.kw,ph,len:+l.len,Ib,In,mccb,icu,curve,S:CAB[si],vd:vd(si),start,rcd,cnotes,phase:""};
-  });
-  // phase balance
-  const P=[0,0,0];
-  circuits.filter(c=>c.ph===3).forEach(c=>{P[0]+=c.Ib;P[1]+=c.Ib;P[2]+=c.Ib;c.phase="L1-L2-L3"});
-  circuits.filter(c=>c.ph===1).sort((a,b)=>b.Ib-a.Ib).forEach(c=>{const k=P.indexOf(Math.min(...P));P[k]+=c.Ib;c.phase="L"+(k+1)});
-  const maxP=Math.max(...P), minP=Math.min(...P);
-  const Idem=maxP*div;
-  const mainIn=nextStd(Math.max(Idem*1.1,25));
-  const mainMccb=mainIn>63||ka>10;
-  const mainIcu=mainMccb?([25,36,50,70].find(v=>v>=ka)||70):10;
-  const bus=BUS.find(b=>b>=mainIn)||BUS[BUS.length-1];
-  if(minP>0&&maxP/minP>1.3)notes.push(`חוסר איזון בין הפאזות (${fmt(minP)}–${fmt(maxP)} A). כדאי לפזר מחדש צרכנים חד-פאזיים.`);
-  circuits.forEach(c=>c.cnotes.forEach(n=>notes.push(`${c.id} ${c.name}: ${n}`)));
-  if(ka>10)notes.push(`זרם קצר ${ka}kA במקור: כל המפסקים נבחרו כ-MCCB עם כושר ניתוק מתאים. ייתכן שבפועל אפשר להשתמש במאמ״תים בתיאום (Cascading) לפי טבלאות היצרן.`);
-
-  // BOM
-  const bom=[]; const add=(name,price,qty=1)=>{const r=bom.find(b=>b.name===name);r?r.qty+=qty:bom.push({name,price,qty})};
-  let modules=0, big=0;
-  add(mainMccb?`מפסק ראשי MCCB 4P ${mainIn}A ${mainIcu}kA`:`מפסק ראשי 4P ${mainIn}A ${mainIcu}kA`,mainMccb?mccbPrice(mainIn):260);
-  if(!mainMccb)modules+=4;
-  add("מגן ברקים SPD Type 2 4P",650); modules+=4;
-  add("נורות סימון פאזות",40,3); modules+=3;
-  add(`פס צבירה נחושת ${bus}A`,Math.round(bus*3.2));
-  circuits.forEach(c=>{
-    const p=c.ph===3?3:1;
-    if(c.mccb){add(`מפסק MCCB ${p}P ${c.In}A ${c.icu}kA`,mccbPrice(c.In));big+=.5}
-    else{add(`מאמ״ת ${p}P ${c.In}A אופיין ${c.curve} ${c.icu}kA`,p===1?30:(c.In>32?220:110));modules+=p}
-    if(c.rcd){add(`ממסר פחת ${c.ph===3?"4P":"2P"} ${Math.max(25,nextStd(c.In))}A 30mA`,c.ph===3?320:160);modules+=c.ph===3?4:2}
-    if(c.start==="dol"){add(`מגען ${c.kw} קו״ט AC-3`,contPrice(c.kw));add(`ממסר תרמי ל-${fmt(c.Ib,1)}A`,c.Ib<=12?150:c.Ib<=32?250:450);modules+=3}
-    if(c.start==="soft"){add(`מתנע רך ${c.kw} קו״ט`,700+120*c.kw);big+=1}
-    if(c.start==="vfd"){add(`ממיר תדר ${c.kw} קו״ט`,900+280*c.kw);big+=1}
-  });
-  const rows=Math.max(1,Math.ceil(modules*1.2/24));
-  let h=rows*150+(mainMccb?300:0)+Math.ceil(big/3)*350+200;
-  const H=[600,800,1000,1200,1400,1600,1800,2000,2200];
-  const encH=H.find(x=>x>=h)||2200;
-  const floor=encH>1200, encW=(big>0||mainMccb||floor)?800:600, encD=floor?400:250;
-  if(h>2200)notes.push("הציוד לא נכנס בשדה אחד. נדרש לוח רב-שדות.");
-  add(`ארון ${floor?"עומד":"תלוי"} ${encH}×${encW}×${encD} מ״מ IP54`,floor?Math.round(3500+encH*1.5+(encW===800?800:0)):Math.round(600+encH*1.2));
-  const comp=bom.reduce((s,b)=>s+b.price*b.qty,0);
-  add("חיווט, מהדקים, תעלות ושילוט",Math.round(comp*.12));
-  const materials=bom.reduce((s,b)=>s+b.price*b.qty,0);
-  const vfdCount=circuits.filter(c=>c.start==="vfd"||c.start==="soft").length;
-  const hours=6+1.5*circuits.length+2*vfdCount+(floor?4:0);
-  const labor=hours*(+state.pricing.rate||0);
-  const net=Math.round((materials+labor)*(1+(+state.pricing.margin||0)/100)/10)*10;
-  const days=10+(vfdCount?5:0)+(floor?5:0);
-  const kwTot=circuits.reduce((s,c)=>s+c.kw,0);
-  if(!notes.length&&circuits.length)notes.push("__ok");
-  return {ka,div,circuits,P,Idem,mainIn,mainMccb,mainIcu,bus,bom,materials,hours,labor,net,gross:Math.round(net*(1+VAT)),days,kwTot,encH,encW,encD,floor,modules,notes,vfdCount};
+// ================= live preview =================
+let liveT=0;
+function scheduleLive(){clearTimeout(liveT);liveT=setTimeout(updateLive,180)}
+function updateLive(){
+  const r=compute();
+  if(!r.circuits.length){$("#liveSum").innerHTML="";$("#liveSld").innerHTML=`<div class="empty">הזינו צרכן עם הספק כדי לראות את הסקיצה.</div>`;updateCustSend(r);return}
+  const chips=[`חיבור מומלץ <b dir="ltr">3×${r.connAuto}A</b>`,`מפסק ראשי <b dir="ltr">${r.conn}A</b>`,`<b>${r.circuits.length}</b> מעגלים`,`הספק מותקן <b>${f1(r.Pinst)}</b> קו״ט`,`ארון <b dir="ltr">${r.encH}×${r.encW}</b>`];
+  if(!isCust()&&(r.notes.length))chips.push(`<b class="warn">${r.notes.length}</b> חריגות לבדיקה`);
+  if(isCust()&&state.eng.showPrice)chips.push(`מחיר משוער <b>${fmt(r.net)} ₪</b> + מע״מ`);
+  $("#liveSum").innerHTML=chips.map(c=>`<span>${c}</span>`).join("");
+  $("#liveSld").innerHTML=sld(r);
+  updateCustSend(r);
+}
+function updateCustSend(r){
+  const c=state.customer,ok=r.circuits.length>0&&(c.name||c.phone||c.email);
+  const link=baseUrl()+"?r="+encodeReq()+"#review";
+  const msg=`בקשת הצעה ללוח חשמל\nלקוח: ${c.name||""}${c.company?` (${c.company})`:""}\nטלפון: ${c.phone||""}\nאתר: ${c.site||""}\n${r.circuits.length} מעגלים, הספק מותקן ${f1(r.Pinst)} קו״ט, חיבור מומלץ 3×${r.connAuto}A\n${c.notes?`הערות: ${c.notes}\n`:""}\nלפתיחת הבקשה והסקיצה:\n${link}`;
+  $("#sendWa").href="https://wa.me/972507878486?text="+encodeURIComponent(msg);
+  $("#sendMail").href=`mailto:Eltechproj@gmail.com?subject=${encodeURIComponent("בקשת הצעה ללוח חשמל"+(c.company?" – "+c.company:""))}&body=${encodeURIComponent(msg)}`;
+  ["#sendWa","#sendMail"].forEach(s=>$(s).setAttribute("aria-disabled",ok?"false":"true"));
 }
 
-// ---------- single-line diagram ----------
-function sld(r){
-  const n=r.circuits.length, gap=118, W=Math.max(420,90+n*gap), Hh=470, cx=W/2;
-  const X=i=>W-60-i*gap; // circuit 1 on the right (RTL reading)
-  const brk=(x,y)=>`<path class="w" d="M${x} ${y}v12M${x} ${y+12}l13 22M${x} ${y+38}v12"/><path class="w" d="M${x-4} ${y+8}l8 8M${x+4} ${y+8}l-8 8"/>`;
-  const load=(c,x,y)=>{
-    if(c.type==="light")return `<circle class="w fillbg" cx="${x}" cy="${y}" r="15"/><path class="w" d="M${x-10.6} ${y-10.6}l21.2 21.2M${x+10.6} ${y-10.6}l-21.2 21.2"/>`;
-    if(c.type==="socket")return `<path class="w" d="M${x-15} ${y+6}a15 15 0 0 1 30 0zM${x} ${y-9}v-6"/>`;
-    if(c.type==="heat")return `<rect class="w fillbg" x="${x-16}" y="${y-11}" width="32" height="22"/><path class="w" d="M${x-10} ${y}q5 -8 10 0t10 0"/>`;
-    const lbl=c.type==="hvac"?"AC":"M";
-    return `<circle class="w fillbg" cx="${x}" cy="${y}" r="16"/><text x="${x}" y="${y+5}" text-anchor="middle" font-size="14" font-weight="700">${lbl}</text>`;
-  };
-  let s=`<svg class="sld" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${Hh}" width="${W}" height="${Hh}" role="img" aria-label="סקיצה חד-קווית של הלוח" direction="rtl">`;
-  s+=`<text x="${cx}" y="20" text-anchor="middle" font-size="13" font-weight="700">הזנה 400/230V · ${r.ka}kA</text>`;
-  s+=`<path class="w" d="M${cx} 28v22"/>`+brk(cx,50);
-  s+=`<text x="${cx+22}" y="72" font-size="12" text-anchor="end" direction="ltr">Q1 ${r.mainIn}A 4P</text>`;
-  s+=`<text x="${cx+22}" y="88" font-size="11" class="m" text-anchor="end" direction="ltr">${r.mainMccb?"MCCB":"MCB"} ${r.mainIcu}kA</text>`;
-  s+=`<path class="w" d="M${cx} 100v30"/>`;
-  const x0=Math.min(30,X(n-1)-20), x1=W-30;
-  ["--l1","--l2","--l3"].forEach((v,k)=>{s+=`<line x1="${x0}" x2="${x1}" y1="${130+k*5}" y2="${130+k*5}" stroke="var(${v})" stroke-width="4"/>`});
-  s+=`<text x="${x0}" y="160" font-size="11" class="m" direction="ltr">${r.bus}A</text>`;
-  r.circuits.forEach((c,i)=>{
-    const x=X(i); let y=142;
-    s+=`<path class="w" d="M${x} ${y}v22"/>`; y=164;
-    s+=brk(x,y);
-    s+=`<text x="${x+18}" y="${y+18}" font-size="12" font-weight="700" direction="ltr">${c.id}</text>`;
-    s+=`<text x="${x+18}" y="${y+33}" font-size="11" class="m" direction="ltr">${c.In}A${c.curve?" "+c.curve:""}</text>`;
-    y+=50;
-    if(c.rcd){s+=`<path class="w" d="M${x} ${y}v8"/><circle class="w" cx="${x}" cy="${y+16}" r="7"/><path class="w" d="M${x} ${y+23}v7"/><text x="${x+12}" y="${y+20}" font-size="10" class="m" direction="ltr">30mA</text>`;y+=30}
-    if(c.start){
-      const t=c.start==="vfd"?"VFD":c.start==="soft"?"SS":"K";
-      s+=`<path class="w" d="M${x} ${y}v8"/><rect class="w fillbg" x="${x-17}" y="${y+8}" width="34" height="24" rx="2"/><text x="${x}" y="${y+25}" text-anchor="middle" font-size="11" font-weight="700" direction="ltr">${t}</text>`;y+=32;
-    }
-    const ly=392;
-    s+=`<path class="w" d="M${x} ${y}V${ly-17}"/>`;
-    s+=`<text x="${x-6}" y="${(y+ly)/2+4}" font-size="10" class="m" text-anchor="end">${fmt(c.S,c.S%1?1:0)} ממ״ר</text>`;
-    s+=`<text x="${x-6}" y="${(y+ly)/2+17}" font-size="10" class="m" text-anchor="end">${c.len} מ׳</text>`;
-    s+=load(c,x,ly);
-    const nm=c.name.length>14?c.name.slice(0,13)+"…":c.name;
-    s+=`<text x="${x}" y="${ly+36}" text-anchor="middle" font-size="12">${esc(nm)}</text>`;
-    s+=`<text x="${x}" y="${ly+52}" text-anchor="middle" font-size="11" class="m">${fmt(c.kw,c.kw%1?1:0)} קו״ט · ${c.phase}</text>`;
-  });
-  return s+"</svg>";
-}
-
-// ---------- review ----------
+// ================= review =================
+function showFrom(){["#fromCust","#fromCust2"].forEach(s=>{const b=$(s);b.hidden=!fromCustomer;b.textContent=fromCustomer?`נטענה בקשה מלקוח: ${fromCustomer}. בדוק את הנתונים לפני שליחת הצעה.`:""})}
 function renderReview(){
-  const r=compute(); const box=$("#reviewBody");
-  if(!r.circuits.length){box.innerHTML=`<div class="empty">אין עדיין צרכנים עם הספק. <a href="#request">חזור לפנייה והוסף צרכנים</a>.</div>`;return}
-  const notes=r.notes.map(n=>n==="__ok"?`<li class="ok">לא נמצאו חריגות בבדיקות האוטומטיות.</li>`:`<li>${esc(n)}</li>`).join("");
+  const r=compute(),box=$("#reviewBody");
+  if(!r.circuits.length){box.innerHTML=`<div class="empty">אין עדיין צרכנים עם הספק. <a href="#request">חזור לנתוני הלוח</a>.</div>`;return}
+  const notes=[...r.notes.map(n=>`<li>${esc(n)}</li>`),...r.info.map(n=>`<li class="info">${esc(n)}</li>`)];
+  if(!r.notes.length)notes.unshift(`<li class="ok">לא נמצאו חריגות בבדיקות האוטומטיות (העמסת כבלים, מפל מתח, ניתוק אוטומטי, כושר ניתוק).</li>`);
   box.innerHTML=`
   <div class="stats">
-    <div class="stat"><span>הספק מותקן</span><strong>${fmt(r.kwTot,1)} קו״ט</strong></div>
-    <div class="stat"><span>זרם מחושב (פאזה עמוסה × ${r.div})</span><strong>${fmt(r.Idem)} A</strong></div>
-    <div class="stat"><span>מפסק ראשי</span><strong>${r.mainIn}A ${r.mainIcu}kA</strong></div>
-    <div class="stat"><span>פס צבירה</span><strong>${r.bus}A</strong></div>
-    <div class="stat"><span>ארון</span><strong>${r.encH}×${r.encW}×${r.encD}</strong></div>
+    <div class="stat"><span>הספק מותקן / ביקוש</span><strong>${f1(r.Pinst)} / ${f1(r.Pdem)} קו״ט</strong></div>
+    <div class="stat"><span>זרם ביקוש (פאזה עמוסה × ${r.ks})</span><strong>${fmt(r.Idem)} A</strong></div>
+    <div class="stat"><span>חיבור / מפסק ראשי</span><strong dir="ltr">3×${r.conn}A · ${r.mainMccb?"MCCB "+r.frame+"A":"MCB"}</strong></div>
+    <div class="stat"><span>זרם קצר בלוח</span><strong dir="ltr">${r.IkP} kA</strong></div>
+    <div class="stat"><span>כבל הזנה</span><strong dir="ltr">N2XY ${cableLabel(r.Sf,3,r.earth==="TN-S")}</strong></div>
+    <div class="stat"><span>ארון</span><strong dir="ltr">${r.encH}×${r.encW}×${r.encD}</strong></div>
   </div>
-  <h3>ממצאים לבדיקה</h3><ul class="notes">${notes}</ul>
-  <h3>סקיצה חד-קווית</h3>
+  <h3>ממצאים לבדיקה</h3><ul class="notes">${notes.join("")}</ul>
+  <h3>סכמה חד-קווית</h3>
   <div class="scroll">${sld(r)}</div>
-  <h3>טבלת מעגלים</h3>
+  <h3>חישוב מעגלים</h3>
   <div class="scroll"><table>
-    <thead><tr><th>מעגל</th><th>צרכן</th><th class="num">קו״ט</th><th>פאזה</th><th class="num">Ib (A)</th><th>הגנה</th><th>פחת</th><th>התנעה</th><th class="num">כבל (ממ״ר)</th><th class="num">אורך</th><th class="num">מפל מתח</th></tr></thead>
-    <tbody>${r.circuits.map(c=>`<tr><td>${c.id}</td><td>${esc(c.name)}</td><td class="num">${fmt(c.kw,1)}</td><td dir="ltr">${c.phase}</td><td class="num">${fmt(c.Ib,1)}</td><td dir="ltr">${c.mccb?"MCCB":"MCB"} ${c.In}A ${c.curve} ${c.icu}kA</td><td>${c.rcd?"30mA":"–"}</td><td>${{dol:"ישירה",soft:"מתנע רך",vfd:"ממיר תדר"}[c.start]||"–"}</td><td class="num">${c.ph===3?"5×":"3×"}${c.S}</td><td class="num">${c.len} מ׳</td><td class="num${c.vd>state.supply.vd?" warn":""}">${fmt(c.vd,2)}%</td></tr>`).join("")}</tbody>
+    <thead><tr><th>מעגל</th><th>צרכן</th><th>פאזה</th><th class="num">Ib</th><th>הגנה</th><th class="num">In / Ir</th><th>פחת</th><th>התנעה</th><th>כבל N2XY</th><th class="num">Iz</th><th>התקנה</th><th class="num">ΔU מצטבר</th><th class="num">Ik1 בקצה</th><th class="num">Ia</th><th>ניתוק</th></tr></thead>
+    <tbody>${r.circuits.map(c=>`<tr><td>${c.id}</td><td>${esc(c.name)}</td><td dir="ltr">${c.phase}</td><td class="num">${f1(c.Ib)}</td><td dir="ltr">${c.dev.kind==="MPCB"?`MPCB ${c.dev.lo}–${c.dev.hi}A`:c.dev.kind==="MCCB"?`MCCB ${c.dev.frame}A`:`MCB ${c.dev.curve} ${c.ph===3?"3P":"1P"}`} ${c.dev.icu}kA</td><td class="num">${f1(c.dev.Iset)}</td><td>${c.rcd?`${c.rcdIn}A ${c.rcd}mA`:"–"}</td><td>${{dol:`ישירה, מגען ${c.cont}A`,soft:"מתנע רך",vfd:"ממיר תדר"}[c.start]||"–"}</td><td dir="ltr">${c.cable}</td><td class="num">${f1(c.Iz)}</td><td>${METHODS[c.method].label}</td><td class="num${c.vd>c.vdLim?" warn":""}">${f1(c.vd)}%</td><td class="num">${fmt(c.ik1)}</td><td class="num">${fmt(c.dev.Ia)}</td><td class="${c.ads==="fail"?"warn":"okc"}">${c.ads==="rcd"?"ממסר פחת":c.ads==="ok"?"תקין":"לא תקין"}</td></tr>`).join("")}</tbody>
   </table></div>
-  <p class="foot">עומס פאזות: L1 ${fmt(r.P[0])}A, L2 ${fmt(r.P[1])}A, L3 ${fmt(r.P[2])}A (לפני מקדם בו-זמניות).</p>
+  <p class="foot">תנאים שנבדקו לכל מעגל: Ib ≤ In ≤ Iz (Iz כולל מקדם תיקון ${state.eng.corr}); מפל מתח מצטבר מנקודת החיבור, כולל כבל ההזנה (${f1(r.vdFeed)}%); זרם קצר מינימלי בקצה הקו מול זרם הניתוק המגנטי (TN); כושר ניתוק מול זרם הקצר בלוח. עומס פאזות לפני מקדם בו-זמניות: L1 ${fmt(r.P[0])}A, L2 ${fmt(r.P[1])}A, L3 ${fmt(r.P[2])}A.</p>
   <h3>רשימת חומרים והצעת מחיר</h3>
   <div class="inline-set">
     <label>תעריף שעת עבודה (₪)<input id="rate" type="number" min="0" step="10" value="${state.pricing.rate}"></label>
@@ -480,39 +782,40 @@ function renderReview(){
   <div class="scroll"><table>
     <thead><tr><th>פריט</th><th class="num">כמות</th><th class="num">מחיר יחידה</th><th class="num">סה״כ</th></tr></thead>
     <tbody>${r.bom.map(b=>`<tr><td>${esc(b.name)}</td><td class="num">${b.qty}</td><td class="num">${fmt(b.price)} ₪</td><td class="num">${fmt(b.price*b.qty)} ₪</td></tr>`).join("")}
-    <tr><td>עבודת הרכבה וחיווט</td><td class="num">${fmt(r.hours,1)} ש׳</td><td class="num">${fmt(state.pricing.rate)} ₪</td><td class="num">${fmt(r.labor)} ₪</td></tr>
+    <tr><td>עבודת הרכבה, חיווט ובדיקות</td><td class="num">${f1(r.hours)} ש׳</td><td class="num">${fmt(state.pricing.rate)} ₪</td><td class="num">${fmt(r.labor)} ₪</td></tr>
     <tr class="tot"><td>מחיר ללקוח לפני מע״מ (כולל רווח ${state.pricing.margin}%)</td><td></td><td></td><td class="num">${fmt(r.net)} ₪</td></tr>
     <tr class="tot"><td>כולל מע״מ ${VAT*100}%</td><td></td><td></td><td class="num">${fmt(r.gross)} ₪</td></tr></tbody>
   </table></div>
   <p class="foot">זמן אספקה משוער: ${r.days} ימי עבודה. המחירון לדוגמה בלבד; יש להחליף אותו במחירון הספקים שלך.</p>
-  <div class="btns"><a class="btn" href="#request">חזור לעריכת הפנייה</a><button type="button" class="primary" id="toReply">המשך לתשובה ללקוח</button></div>`;
-  $("#rate").oninput=e=>{state.pricing.rate=parseFloat(e.target.value)||0;save();renderReview()};
-  $("#margin").oninput=e=>{state.pricing.margin=parseFloat(e.target.value)||0;save();renderReview()};
+  <div class="btns"><a class="btn" href="#request">חזור לנתוני הלוח</a><button type="button" class="primary" id="toReply">המשך לתשובה ללקוח</button></div>`;
+  $("#rate").onchange=e=>{state.pricing.rate=parseFloat(e.target.value)||0;save();renderReview()};
+  $("#margin").onchange=e=>{state.pricing.margin=parseFloat(e.target.value)||0;save();renderReview()};
   $("#toReply").onclick=()=>{location.hash="reply"};
 }
 
-// ---------- reply ----------
+// ================= reply =================
 let letterEdited=false;
 function buildLetter(r){
-  const c=state.customer;
-  const types={};r.circuits.forEach(x=>{types[x.start]=(types[x.start]||0)+1});
-  const extras=[types.vfd?`${types.vfd} ממירי תדר`:"",types.soft?`${types.soft} מתנעים רכים`:"",types.dol?`${types.dol} יציאות מנוע בהתנעה ישירה`:""].filter(Boolean).join(", ");
+  const c=state.customer,cnt={};r.circuits.forEach(x=>{cnt[x.start]=(cnt[x.start]||0)+1});
+  const extras=[cnt.vfd?`${cnt.vfd} ממירי תדר`:"",cnt.soft?`${cnt.soft} מתנעים רכים`:"",cnt.dol?`${cnt.dol} יציאות מנוע עם מגן מנוע ומגען`:""].filter(Boolean).join(", ");
   return `שלום ${c.name||""},
 
-תודה על פנייתך ל-Eltech בנושא לוח חשמל${c.site?` עבור ${c.site}`:""}${c.company?` (${c.company})`:""}.
+תודה על פנייתך ל-Eltech בנושא ${state.project.panel||"לוח חשמל"}${c.site?` עבור ${c.site}`:""}${c.company?` (${c.company})`:""}.
 
-על סמך הנתונים שמסרת, ${r.circuits.length} צרכנים בהספק מותקן כולל של ${fmt(r.kwTot,1)} קו״ט, הכנו סקיצה ראשונית של הלוח:
+על סמך הנתונים שמסרת, ${r.circuits.length} מעגלים בהספק מותקן של ${f1(r.Pinst)} קו״ט (הספק ביקוש מחושב ${f1(r.Pdem)} קו״ט), הכנו סקיצה ראשונית של הלוח:
 
-• הזנה ראשית: מפסק ${r.mainIn} אמפר, 4 קטבים, כושר ניתוק ${r.mainIcu}kA
-• פס צבירה: ${r.bus} אמפר, עם הגנת מגן ברקים ונורות סימון
-• ${r.circuits.length} יציאות${extras?`, כולל ${extras}`:""}
-• הגנת פחת 30mA על מעגלי תאורה ושקעים
-• ארון ${r.floor?"עומד":"תלוי"} במידות משוערות ${r.encH}×${r.encW}×${r.encD} מ״מ, IP54
+• חיבור חשמל: 3×${r.conn}A, 400/230V, שיטת הארקה ${r.earth}
+• מפסק ראשי: ${r.mainMccb?`MCCB ${r.frame}A מכוון ל-${r.conn}A`:`${r.conn}A`}, ${r.poles} קטבים, כושר ניתוק ${r.mainIcu}kA${state.eng.emergency?", עם סליל הפסקה ולחצן חירום":""}
+• פסי צבירה 3×${r.bus}A, מגן מתח יתר, רב-מודד ונורות סימון
+• ${r.circuits.length} מעגלי יציאה${extras?`, כולל ${extras}`:""}
+• הגנת פחת 30mA על מעגלי השקעים${state.eng.rcdLight?" והתאורה":""}
+• כבל הזנה N2XY ${cableLabel(r.Sf,3,r.earth==="TN-S")}, וכבלי יציאה שנבחרו לפי העמסה, מפל מתח וניתוק אוטומטי
+• ארון ${r.floor?"עומד":"תלוי"} במידות משוערות ${r.encH}×${r.encW}×${r.encD} מ״מ, IP54, לפי ת״י 61439
 
 הצעת מחיר ראשונית: ${fmt(r.net)} ₪ לפני מע״מ (${fmt(r.gross)} ₪ כולל מע״מ).
 זמן אספקה משוער: ${r.days} ימי עבודה מאישור ההזמנה.
 
-הסקיצה החד-קווית מצורפת. ההצעה ראשונית, ותתעדכן לאחר סקר באתר ואישור סופי של התכנון.
+הסכמה החד-קווית מצורפת. ההצעה ראשונית, ותתעדכן לאחר סקר באתר ואישור סופי של התכנון.
 
 נשמח לענות על כל שאלה.
 
@@ -522,21 +825,18 @@ Eltech - Eliran Krispin
 משרד: 052-4341604 | הנדסה: 050-7878486
 Eltechproj@gmail.com`;
 }
-function fillLetter(){const r=compute();$("#letter").value=r.circuits.length?buildLetter(r):"אין עדיין צרכנים בפנייה.";updateMail()}
+function fillLetter(){const r=compute();$("#letter").value=r.circuits.length?buildLetter(r):"אין עדיין צרכנים.";updateMail()}
 function updateMail(){
-  const ok=$("#approve").checked&&compute().circuits.length>0;
-  const c=state.customer;
-  const subj=`Eltech: הצעה ראשונית ללוח חשמל${c.site?" – "+c.site:""}`;
+  const ok=$("#approve").checked&&compute().circuits.length>0, c=state.customer;
+  const subj=`Eltech: הצעה ראשונית ל${state.project.panel||"לוח חשמל"}${c.site?" – "+c.site:""}`;
   $("#mailBtn").href=`mailto:${encodeURIComponent(c.email||"")}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent($("#letter").value)}`;
+  const ph=(c.phone||"").replace(/\D/g,"").replace(/^0/,"972");
+  $("#waBtn").href=`https://wa.me/${ph}?text=${encodeURIComponent($("#letter").value)}`;
   $("#mailBtn").setAttribute("aria-disabled",ok?"false":"true");
+  $("#waBtn").setAttribute("aria-disabled",ok&&ph.length>=11?"false":"true");
   $("#copyBtn").disabled=!ok;$("#printBtn").disabled=!ok;
 }
-function renderReply(){
-  const r=compute();
-  if(!letterEdited)fillLetter();
-  $("#replySld").innerHTML=r.circuits.length?sld(r):`<div class="empty">אין סקיצה עדיין.</div>`;
-  updateMail();
-}
+function renderReply(){const r=compute();if(!letterEdited)fillLetter();$("#replySld").innerHTML=r.circuits.length?sld(r):`<div class="empty">אין סכמה עדיין.</div>`;updateMail()}
 $("#letter").oninput=()=>{letterEdited=true;updateMail()};
 $("#approve").onchange=()=>{updateMail();$("#status").textContent=$("#approve").checked?"התשובה אושרה לשליחה.":""};
 $("#regen").onclick=()=>{letterEdited=false;fillLetter();$("#status").textContent="המכתב נוצר מחדש מהנתונים העדכניים."};
@@ -547,18 +847,23 @@ $("#copyBtn").onclick=async()=>{
   catch(e){const ta=$("#letter");ta.focus();ta.select();try{document.execCommand("copy");$("#status").textContent="המכתב הועתק."}catch(_){$("#status").textContent="ההעתקה נחסמה. המכתב מסומן, העתק ידנית."}}
 };
 
-// ---------- router ----------
+// ================= router =================
 const VIEWS=["request","review","reply"];
 function route(){
-  const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"request";
+  const h=location.hash.slice(1);
+  const cust=h==="customer";
+  document.body.classList.toggle("cust",cust);
+  const v=cust?"request":(VIEWS.includes(h)?h:"request");
   VIEWS.forEach(x=>$("#"+x).classList.toggle("on",x===v));
   document.querySelectorAll("nav.steps a").forEach(a=>{if(a.dataset.v===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  document.title=cust?"בקשת הצעה ללוח חשמל | Eltech - Eliran Krispin":"Eltech - Eliran Krispin | סקיצות לוחות חשמל והצעות מחיר";
+  if(v==="request"){renderLoads();updateLive()}
   if(v==="review")renderReview();
   if(v==="reply")renderReply();
   window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
-bindFields();renderLoads();route();
+bindFields();showFrom();route();
 </script>
 </body>
 </html>
